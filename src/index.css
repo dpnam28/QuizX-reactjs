@@ -1,1 +1,5 @@
 @import "tailwindcss" important;
+
+.active {
+  color: var(--color-blue-400) !important;
+}
