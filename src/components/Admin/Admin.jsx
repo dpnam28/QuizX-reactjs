@@ -1,5 +1,7 @@
 const Admin = (props) => {
-  return <>Admin page</>;
+  return (
+    <div className="text-center text-5xl text-black font-black">Admin page</div>
+  );
 };
 
 export default Admin;
