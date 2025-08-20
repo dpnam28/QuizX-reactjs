@@ -1,10 +1,9 @@
 import Video from "../assets/video/video1.mp4";
-
 export const HomePage = (props) => {
   return (
     <>
-      <div className="container flex mt-10 lg:w-[78%]">
-        <div className="lg:w-[50%] flex flex-col justify-center align-middle mr-10">
+      <div className="container flex mt-10 lg:w-[80%] lg:pl-0 pl-10">
+        <div className="lg:w-[50%] flex flex-col justify-center align-middle sm:mr-10">
           <p className="uppercase text-purple-600 text-sm font-semibold">
             Forms, surveys, and quizzes
           </p>
@@ -23,7 +22,7 @@ export const HomePage = (props) => {
           loop
           autoPlay
           muted
-          className="size-50 m-auto lg:size-100 sm:size-70"
+          className="size-50 m-auto lg:size-100 sm:size-70 hidden sm:block"
         >
           <source src={Video} type="video/mp4" />
         </video>
