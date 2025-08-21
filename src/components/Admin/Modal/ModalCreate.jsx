@@ -4,11 +4,11 @@ import Modal from "react-bootstrap/Modal";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
-import axios from "axios";
-import { toast, Bounce } from "react-toastify";
+import { toast } from "react-toastify";
+import { createNewParticipant } from "../../../services/apiServices";
 
 function ModalCreate(props) {
-  const { show, setShow } = props;
+  const { show, setShow, fetchListUser } = props;
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -47,19 +47,15 @@ function ModalCreate(props) {
       });
       return;
     } else {
-      let data = new FormData();
-      data.append("email", email);
-      data.append("password", password);
-      data.append("username", username);
-      data.append("role", role);
-      data.append("userImage", image);
-      let res = await axios.post(
-        "http://localhost:8081/api/v1/participant",
-        data
+      let res = await createNewParticipant(
+        email,
+        password,
+        username,
+        role,
+        image
       );
-
-      if (res.data?.EC == 0) {
-        toast.success(`${res.data?.EM ?? "Data saved successfully"}`, {
+      if (res?.EC == 0) {
+        toast.success(`${res?.EM ?? "Data saved successfully"}`, {
           closeOnClick: true,
         });
         handleClose();
@@ -68,8 +64,9 @@ function ModalCreate(props) {
         setUsername("");
         setImage("");
         setPreviewImg("");
+        fetchListUser();
       } else {
-        toast.warn(`${res.data?.EM ?? "Error message form server"}`, {
+        toast.warn(`${res?.EM ?? "Error message form server"}`, {
           closeOnClick: true,
         });
       }
@@ -87,7 +84,7 @@ function ModalCreate(props) {
 
   return (
     <>
-      <Button variant="dark" onClick={handleShow}>
+      <Button variant="dark" onClick={handleShow} className="w-40 pb-2">
         Add a new user
       </Button>
 
