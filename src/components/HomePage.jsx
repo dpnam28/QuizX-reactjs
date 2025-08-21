@@ -2,15 +2,15 @@ import Video from "../assets/video/video1.mp4";
 export const HomePage = (props) => {
   return (
     <>
-      <div className="container flex mt-10 lg:w-[80%] lg:pl-0 pl-10">
-        <div className="lg:w-[50%] flex flex-col justify-center align-middle sm:mr-10">
+      <div className="container flex mt-10 w-[70%] md:w-[80%] md:pl-0 pl-10">
+        <div className="md:w-[50%] md:pl-5 flex flex-col justify-center align-middle sm:mr-10">
           <p className="uppercase text-purple-600 text-sm font-semibold">
             Forms, surveys, and quizzes
           </p>
-          <div className="sm:text-4xl sm:font-normal lg:w-[80%] lg:text-5xl lg:leading-14 text-xl font-semibold">
+          <div className="sm:text-4xl sm:font-normal md:w-[80%] md:text-5xl md:leading-14 text-xl font-semibold">
             Get up to 3.5x more data about them
           </div>
-          <div className="mt-3 sm:font-normal text-lg leading-6 sm:text-xl sm:leading-8">
+          <div className="mt-3 text-lg leading-6 md:font-normal md:text-xl md:leading-8">
             When your forms break the norm,sm more people fill them out. Think
             branded designs, video content, and relevant follow-up questions.
           </div>

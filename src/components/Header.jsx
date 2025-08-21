@@ -7,8 +7,8 @@ import { HomeSidebar } from "./HomeSideBar";
 function Header() {
   return (
     <>
-      <HomeSidebar />
       <Navbar expand="sm" className="sticky top-0 bg-white px-[7%]">
+        <HomeSidebar />
         <Link
           to="/"
           className="nav-link text-3xl font-bold pl-6 text-transparent bg-linear-to-r from-blue-400 to-purple-500 bg-clip-text"
