@@ -1,29 +1,63 @@
+import {
+  getAllUsers,
+  getListUserWithPagination,
+} from "../../services/apiServices";
+import { useEffect, useState } from "react";
 import ModalCreate from "./Modal/ModalCreate";
 import AllUserTable from "./Table/AllUserTable";
-import { getAllUsers } from "../../services/apiServices";
-import { useEffect, useState } from "react";
 import ModalUpdate from "./Modal/ModalUpdate";
+import ModalView from "./Modal/ModalView";
+import ModalDelete from "./Modal/ModalDelete";
+
 const ManageUsers = (props) => {
+  const LIMIT_PER_PAGE = 5;
+
   const [showModalAddUser, setShowModalAddUser] = useState(false);
   const [showModalUpdateUser, setShowModalUpdateUser] = useState(false);
+  const [showModalViewUser, setShowModalViewUser] = useState(false);
+  const [showModalDeleteUser, setShowModalDeleteUser] = useState(false);
   const [listAllUsers, setListAllUsers] = useState([]);
-  const [updatingUser, setUpdatingUser] = useState({});
+  const [listAllUsersWithPagination, setListAllUsersWithPagination] = useState(
+    []
+  );
+  const [userSelected, setUserSelected] = useState({});
 
   useEffect(() => {
     fetchListUser();
   }, []);
 
+  useEffect(() => {
+    fetchListUserWithPagination(1);
+  }, [listAllUsers]);
+
   let handleUpdateBtn = (user) => {
     setShowModalUpdateUser(true);
-    setUpdatingUser(user);
+    setUserSelected(user);
+  };
+
+  const handlShowUser = (user) => {
+    setShowModalViewUser(true);
+    setUserSelected(user);
+  };
+  const handlDeleteUser = (user) => {
+    setShowModalDeleteUser(true);
+    setUserSelected(user);
   };
   let fetchListUser = async () => {
     let res = await getAllUsers();
     if (res?.EC === 0) setListAllUsers(res?.DT ?? []);
   };
 
+  let fetchListUserWithPagination = async (page, limit = LIMIT_PER_PAGE) => {
+    let res = await getListUserWithPagination(page, limit);
+    setListAllUsersWithPagination(res?.DT ?? {});
+  };
+
   return (
     <div className="container flex flex-col">
+      <div className="text-center md:text-5xl text-4xl text-black font-black my-10">
+        User management page
+      </div>
       <div className="m-auto">
         <ModalCreate
           setShow={setShowModalAddUser}
@@ -34,14 +68,32 @@ const ManageUsers = (props) => {
           show={showModalUpdateUser}
           setShow={setShowModalUpdateUser}
           fetchListUser={fetchListUser}
-          updatingUser={updatingUser}
-          setUpdatingUser={setUpdatingUser}
+          updatingUser={userSelected}
+          setUpdatingUser={setUserSelected}
+        />
+        <ModalView
+          show={showModalViewUser}
+          setShow={setShowModalViewUser}
+          userSelected={userSelected}
+          setUserSelected={setUserSelected}
+        />
+        <ModalDelete
+          show={showModalDeleteUser}
+          setShow={setShowModalDeleteUser}
+          fetchListUser={fetchListUser}
+          userSelected={userSelected}
+          setUserSelected={setUserSelected}
         />
       </div>
       <AllUserTable
         listAllUsers={listAllUsers}
         setListAllUsers={setListAllUsers}
         setShowUpdate={handleUpdateBtn}
+        setShowView={handlShowUser}
+        setShowDelete={handlDeleteUser}
+        listAllUsersWithPagination={listAllUsersWithPagination}
+        setListAllUsersWithPagination={setListAllUsersWithPagination}
+        fetchListUserWithPagination={fetchListUserWithPagination}
       />
     </div>
   );

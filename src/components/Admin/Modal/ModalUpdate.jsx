@@ -20,8 +20,8 @@ function ModalUpdate(props) {
 
   useEffect(() => {
     if (!_.isEmpty(updatingUser)) {
-      setEmail(updatingUser.email);
-      setUsername(updatingUser.username);
+      setEmail(updatingUser?.email ?? "");
+      setUsername(updatingUser?.username ?? "");
       setImage("");
       setPreviewImg(
         updatingUser.image ? `data:image/jpeg;base64,${updatingUser.image}` : ""

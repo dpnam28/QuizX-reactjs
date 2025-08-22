@@ -1,13 +1,26 @@
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
-
+import ReactPaginate from "react-paginate";
+import ReactDOM from "react-dom";
+import React, { useEffect, useState } from "react";
 import _ from "lodash";
 
 function AllUserTable(props) {
-  let { listAllUsers, setListAllUsers, setShowUpdate } = props;
+  let {
+    listAllUsersWithPagination,
+    setShowUpdate,
+    setShowView,
+    setShowDelete,
+    fetchListUserWithPagination,
+  } = props;
+
+  // useEffect(() => {}, [listAllUsers]);
+  const handlePageClick = (event) => {
+    fetchListUserWithPagination(event.selected + 1);
+  };
 
   return (
-    <>
+    <div className="flex flex-col items-center">
       <Table
         striped
         bordered
@@ -28,21 +41,28 @@ function AllUserTable(props) {
           </tr>
         </thead>
         <tbody>
-          {!_.isEmpty(listAllUsers) ? (
-            listAllUsers.map((user, index) => {
+          {!_.isEmpty(listAllUsersWithPagination.users) ? (
+            listAllUsersWithPagination.users.map((user, index) => {
               return (
-                <tr key={user.id}>
-                  <td>{index + 1}</td>
+                <tr
+                  key={user.id}
+                  className="cursor-pointer"
+                  onClick={() => setShowView(user)}
+                >
+                  <td>{user?.id ?? "no id"}</td>
                   <td>{user?.username ?? "no username"}</td>
                   <td>{user?.email ?? "no email"}</td>
                   <td>{user?.role ?? "no role"}</td>
-                  <td>{/* user?.image ??  */ "no image"}</td>
+                  <td>{user?.image ? "has image" : "no image"}</td>
                   <td>
                     <Button
                       variant="success"
                       size="sm"
                       className="font-semibold m-2"
-                      onClick={() => setShowUpdate(user)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShowUpdate(user);
+                      }}
                     >
                       Update
                     </Button>
@@ -50,6 +70,10 @@ function AllUserTable(props) {
                       variant="danger"
                       size="sm"
                       className="font-semibold px-2.5"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShowDelete(user);
+                      }}
                     >
                       Delete
                     </Button>
@@ -66,7 +90,30 @@ function AllUserTable(props) {
           )}
         </tbody>
       </Table>
-    </>
+
+      <div className="mt-5">
+        <ReactPaginate
+          nextLabel="Next >"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={3}
+          marginPagesDisplayed={2}
+          pageCount={listAllUsersWithPagination?.totalPages ?? 0}
+          previousLabel="< Prev"
+          pageClassName="page-item"
+          pageLinkClassName="page-link"
+          previousClassName="page-item"
+          previousLinkClassName="page-link"
+          nextClassName="page-item"
+          nextLinkClassName="page-link"
+          breakLabel="..."
+          breakClassName="page-item"
+          breakLinkClassName="page-link"
+          containerClassName="pagination"
+          activeClassName="active"
+          renderOnZeroPageCount={null}
+        />
+      </div>
+    </div>
   );
 }
 

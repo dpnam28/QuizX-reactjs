@@ -27,3 +27,10 @@ export const putUpdateUser = (id, username, role, image) => {
   data.append("userImage", image);
   return axios.put("api/v1/participant", data);
 };
+
+export const deleteUserById = (id) => {
+  return axios.delete("api/v1/participant", { data: { id } });
+};
+export const getListUserWithPagination = (page, limit) => {
+  return axios.get(`api/v1/participant?page=${page}&limit=${limit}`);
+};
