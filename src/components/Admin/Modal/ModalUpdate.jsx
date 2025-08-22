@@ -1,86 +1,72 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { toast } from "react-toastify";
-import { createNewParticipant } from "../../../services/apiServices";
+import { putUpdateUser } from "../../../services/apiServices";
+import _ from "lodash";
 
-function ModalCreate(props) {
-  const { show, setShow, fetchListUser } = props;
+function ModalUpdate(props) {
+  const { show, setShow, fetchListUser, updatingUser, setUpdatingUser } = props;
 
   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState("************");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("USER");
   const [image, setImage] = useState("");
   const [previewImg, setPreviewImg] = useState("");
 
-  const validateEmail = (email) => {
-    return String(email)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  useEffect(() => {
+    if (!_.isEmpty(updatingUser)) {
+      setEmail(updatingUser.email);
+      setUsername(updatingUser.username);
+      setImage("");
+      setPreviewImg(
+        updatingUser.image ? `data:image/jpeg;base64,${updatingUser.image}` : ""
       );
-  };
+    } else {
+      setEmail("");
+      setUsername("");
+      setImage("");
+      setPreviewImg("");
+      setRole("");
+    }
+  }, [updatingUser]);
 
   const handleSubmit = async () => {
-    if (!email) {
-      toast.warn("Missing email", {
-        closeOnClick: true,
-      });
-      return;
-    } else if (!validateEmail(email)) {
-      toast.warn("Invalid email", {
-        closeOnClick: true,
-      });
-      return;
-    } else if (!password) {
-      toast.warn("Missing password", {
-        closeOnClick: true,
-      });
-      return;
-    } else if (!username) {
+    if (!username) {
       toast.warn("Missing username", {
         closeOnClick: true,
       });
       return;
-    } else {
-      let res = await createNewParticipant(
-        email,
-        password,
-        username,
-        role,
-        image
-      );
+    }
 
-      if (res?.EC === 0) {
-        toast.success(`${res?.EM ?? "Data saved successfully"}`, {
-          closeOnClick: true,
-        });
-        handleClose();
-        setEmail("");
-        setPassword("");
-        setUsername("");
-        setImage("");
-        setPreviewImg("");
-        fetchListUser();
-      } else if (res.message) {
-        toast.error(res.message, {
-          closeOnClick: true,
-        });
-      } else {
-        toast.warn(`${res?.EM ?? "Error message form server"}`, {
-          closeOnClick: true,
-        });
-      }
+    let res = await putUpdateUser(updatingUser.id, username, role, image);
+
+    if (res?.EC === 0) {
+      handleClose();
+      fetchListUser();
+      toast.success(res.EM, {
+        closeOnClick: true,
+      });
+    } else if (res.message) {
+      toast.error(res.message, {
+        closeOnClick: true,
+      });
+    } else {
+      toast.warn(`${res?.EM ?? "Error message form server"}`, {
+        closeOnClick: true,
+      });
     }
   };
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    setUpdatingUser({});
+  };
   const handleShow = () => setShow(true);
-
   const handleChangeImage = (event) => {
     if (event.target?.files?.[0]) {
       setPreviewImg(URL.createObjectURL(event.target.files[0]));
@@ -90,13 +76,9 @@ function ModalCreate(props) {
 
   return (
     <>
-      <Button variant="dark" onClick={handleShow} className="w-40 pb-2">
-        Add a new user
-      </Button>
-
       <Modal show={show} onHide={handleClose} size="lg" backdrop="static">
         <Modal.Header closeButton>
-          <Modal.Title>Add a new user</Modal.Title>
+          <Modal.Title>Update user</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form noValidate>
@@ -108,7 +90,7 @@ function ModalCreate(props) {
                   type="text"
                   placeholder="Email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  disabled
                 />
               </Form.Group>
               <Form.Group as={Col} md="6" controlId="validationCustom02">
@@ -118,7 +100,7 @@ function ModalCreate(props) {
                   type="password"
                   placeholder="Password"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  disabled
                 />
               </Form.Group>
             </Row>
@@ -182,4 +164,4 @@ function ModalCreate(props) {
   );
 }
 
-export default ModalCreate;
+export default ModalUpdate;

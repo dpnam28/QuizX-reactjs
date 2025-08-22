@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import _ from "lodash";
 
 function AllUserTable(props) {
-  let { listAllUsers, setListAllUsers } = props;
+  let { listAllUsers, setListAllUsers, setShowUpdate } = props;
 
   return (
     <>
@@ -42,6 +42,7 @@ function AllUserTable(props) {
                       variant="success"
                       size="sm"
                       className="font-semibold m-2"
+                      onClick={() => setShowUpdate(user)}
                     >
                       Update
                     </Button>
