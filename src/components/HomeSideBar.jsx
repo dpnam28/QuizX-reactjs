@@ -11,7 +11,7 @@ export const HomeSidebar = () => {
   const [collapsed, setCollapsed] = useState(true);
 
   return (
-    <div className="flex flex-col h-screen min-h-100 z-50 absolute top-0 -left-0">
+    <div className="flex flex-col h-screen min-h-100 -z-10 absolute top-0 -left-0">
       <main className="p-[10px]">
         <div>
           <button

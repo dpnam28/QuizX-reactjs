@@ -3,12 +3,16 @@ import { useNavigate, Link } from "react-router-dom";
 import { postLogIn } from "../../services/apiServices";
 import { LuEyeClosed, LuEye } from "react-icons/lu";
 import { toast } from "react-toastify";
+import { commitLogin } from "../../redux/actions/userAction";
+import { useDispatch } from "react-redux";
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isShowPassword, setIsShowPassword] = useState(false);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const validateEmail = (email) => {
     return String(email)
       .toLowerCase()
@@ -27,6 +31,7 @@ const Login = () => {
       if (password) {
         let res = await postLogIn(email, password);
         if (res?.EC === 0) {
+          dispatch(commitLogin(res));
           toast.success(res?.EM ?? "Succeeded", {
             closeOnClick: true,
           });
