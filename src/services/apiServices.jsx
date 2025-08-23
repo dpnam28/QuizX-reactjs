@@ -34,3 +34,9 @@ export const deleteUserById = (id) => {
 export const getListUserWithPagination = (page, limit) => {
   return axios.get(`api/v1/participant?page=${page}&limit=${limit}`);
 };
+export const postLogIn = (email, password) => {
+  return axios.post(`api/v1/login`, { email, password });
+};
+export const postSignUp = (email, password, username) => {
+  return axios.post(`api/v1/register`, { email, password, username });
+};

@@ -1,10 +1,13 @@
-import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { Link, NavLink } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { HomeSidebar } from "./HomeSideBar";
 
 function Header() {
+  const navigate = useNavigate();
+  const handleLogin = () => {
+    navigate("login");
+  };
   return (
     <>
       <Navbar expand="sm" className="sticky top-0 bg-white px-[7%]">
@@ -19,10 +22,18 @@ function Header() {
         <Navbar.Collapse id="basic-navbar-nav" className="">
           <Nav className="me-auto"></Nav>
           <Nav>
-            <button className="hover:text-blue-400 font-bold px-4 text-base">
+            <button
+              className="hover:text-blue-400 font-bold px-4 text-base"
+              onClick={() => handleLogin()}
+            >
               Log in
             </button>
-            <button className="bg-gray-900 text-white font-bold rounded-xl text-base px-3 py-1.5 hover:bg-gray-600 pt-1">
+            <button
+              onClick={() => {
+                navigate("/signup");
+              }}
+              className="bg-gray-900 text-white font-bold rounded-xl text-base px-3 py-1.5 hover:bg-gray-600 pt-1"
+            >
               Sign up
             </button>
           </Nav>

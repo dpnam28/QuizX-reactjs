@@ -5,7 +5,15 @@ import _ from "lodash";
 import { deleteUserById } from "../../../services/apiServices";
 import { toast } from "react-toastify";
 function ModalDelete(props) {
-  const { show, setShow, userSelected, setUserSelected, fetchListUser } = props;
+  const {
+    show,
+    setShow,
+    userSelected,
+    setUserSelected,
+    fetchListUser,
+    setCurrentPage,
+    currentPage,
+  } = props;
   const [username, setUserName] = useState("");
   const [id, setId] = useState("");
 
@@ -32,7 +40,7 @@ function ModalDelete(props) {
         toast.success(res?.EM ?? "Deleted successfully", {
           closeOnClick: true,
         });
-        fetchListUser();
+        fetchListUser(currentPage);
       } else {
         toast.error(res?.EM ?? "Error from server", {
           closeOnClick: true,

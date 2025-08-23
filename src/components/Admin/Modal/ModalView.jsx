@@ -4,8 +4,6 @@ import Modal from "react-bootstrap/Modal";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
-import { toast } from "react-toastify";
-import { putUpdateUser } from "../../../services/apiServices";
 import _ from "lodash";
 
 function ModalView(props) {

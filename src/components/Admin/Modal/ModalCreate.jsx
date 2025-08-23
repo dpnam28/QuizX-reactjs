@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import { createNewParticipant } from "../../../services/apiServices";
 
 function ModalCreate(props) {
-  const { show, setShow, fetchListUser } = props;
+  const { show, setShow, fetchListUser, currentPage } = props;
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -65,7 +65,7 @@ function ModalCreate(props) {
         setUsername("");
         setImage("");
         setPreviewImg("");
-        fetchListUser();
+        fetchListUser(currentPage);
       } else if (res.message) {
         toast.error(res.message, {
           closeOnClick: true,

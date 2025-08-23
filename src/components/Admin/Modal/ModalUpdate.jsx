@@ -9,7 +9,14 @@ import { putUpdateUser } from "../../../services/apiServices";
 import _ from "lodash";
 
 function ModalUpdate(props) {
-  const { show, setShow, fetchListUser, updatingUser, setUpdatingUser } = props;
+  const {
+    show,
+    setShow,
+    fetchListUser,
+    updatingUser,
+    setUpdatingUser,
+    currentPage,
+  } = props;
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("************");
@@ -22,6 +29,7 @@ function ModalUpdate(props) {
     if (!_.isEmpty(updatingUser)) {
       setEmail(updatingUser?.email ?? "");
       setUsername(updatingUser?.username ?? "");
+      setRole(updatingUser?.role ?? "");
       setImage("");
       setPreviewImg(
         updatingUser.image ? `data:image/jpeg;base64,${updatingUser.image}` : ""
@@ -47,7 +55,7 @@ function ModalUpdate(props) {
 
     if (res?.EC === 0) {
       handleClose();
-      fetchListUser();
+      fetchListUser(currentPage);
       toast.success(res.EM, {
         closeOnClick: true,
       });

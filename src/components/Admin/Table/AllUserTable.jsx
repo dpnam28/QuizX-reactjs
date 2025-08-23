@@ -12,11 +12,14 @@ function AllUserTable(props) {
     setShowView,
     setShowDelete,
     fetchListUserWithPagination,
+    currentPage,
+    setCurrentPage,
   } = props;
 
   // useEffect(() => {}, [listAllUsers]);
   const handlePageClick = (event) => {
     fetchListUserWithPagination(event.selected + 1);
+    setCurrentPage(event.selected + 1);
   };
 
   return (
