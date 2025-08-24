@@ -14,11 +14,9 @@ export const createNewParticipant = (
   data.append("userImage", image);
   return axios.post("api/v1/participant", data);
 };
-
 export const getAllUsers = () => {
   return axios.get("api/v1/participant/all");
 };
-
 export const putUpdateUser = (id, username, role, image) => {
   let data = new FormData();
   data.append("id", id);
@@ -27,7 +25,6 @@ export const putUpdateUser = (id, username, role, image) => {
   data.append("userImage", image);
   return axios.put("api/v1/participant", data);
 };
-
 export const deleteUserById = (id) => {
   return axios.delete("api/v1/participant", { data: { id } });
 };
@@ -39,4 +36,7 @@ export const postLogIn = (email, password) => {
 };
 export const postSignUp = (email, password, username) => {
   return axios.post(`api/v1/register`, { email, password, username });
+};
+export const getQuizByUser = () => {
+  return axios.get("api/v1/quiz-by-participant");
 };

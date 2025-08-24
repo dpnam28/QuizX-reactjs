@@ -6,3 +6,8 @@ export const commitLogin = (data) => {
     payload: data,
   };
 };
+export const commitLogOut = () => {
+  return {
+    type: actionTypes.LOG_OUT,
+  };
+};

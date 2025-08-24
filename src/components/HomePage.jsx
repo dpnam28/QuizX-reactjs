@@ -1,5 +1,10 @@
 import Video from "../assets/video/video1.mp4";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 export const HomePage = (props) => {
+  const navigate = useNavigate();
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   return (
     <>
       <div className="container flex mt-10 w-[70%] md:w-[80%] md:pl-0 pl-10">
@@ -14,9 +19,21 @@ export const HomePage = (props) => {
             When your forms break the norm,sm more people fill them out. Think
             branded designs, video content, and relevant follow-up questions.
           </div>
-          <button className="mt-5 bg-gray-900 w-40 text-white px-6 py-3 rounded-2xl font-bold text-sm">
-            Sign up
-          </button>
+          {isAuthenticated ? (
+            <button
+              onClick={() => navigate("user")}
+              className="mt-5 bg-gray-900 w-40 text-white px-6 py-3 rounded-2xl font-bold text-sm"
+            >
+              Do Quiz Now
+            </button>
+          ) : (
+            <button
+              onClick={() => navigate("signup")}
+              className="mt-5 bg-gray-900 w-40 text-white px-6 py-3 rounded-2xl font-bold text-sm"
+            >
+              Sign up
+            </button>
+          )}
         </div>
         <video
           loop

@@ -25,7 +25,17 @@ const userReducer = (state = INITAL_STATE, action) => {
         },
         isAuthenticated: true,
       };
-
+    case actionTypes.LOG_OUT:
+      return {
+        account: {
+          access_token: "",
+          refresh_token: "",
+          username: "",
+          image: "",
+          role: "",
+        },
+        isAuthenticated: false,
+      };
     default:
       return state;
   }

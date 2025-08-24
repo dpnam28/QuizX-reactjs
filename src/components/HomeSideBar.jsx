@@ -4,11 +4,11 @@ import { LuSquareMenu } from "react-icons/lu";
 import { Link, NavLink } from "react-router-dom";
 import { FaHome, FaUser } from "react-icons/fa";
 import { MdAdminPanelSettings } from "react-icons/md";
-import User from "./User/User";
-import DashBoard from "./Admin/DashBoard";
-import ManageUsers from "./Admin/ManageUsers";
+import { useSelector } from "react-redux";
+
 export const HomeSidebar = () => {
   const [collapsed, setCollapsed] = useState(true);
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
 
   return (
     <div className="flex flex-col h-screen min-h-100 -z-10 absolute top-0 -left-0">
@@ -35,13 +35,15 @@ export const HomeSidebar = () => {
           >
             Home
           </MenuItem>
-          <MenuItem
-            icon={<FaUser />}
-            component={<NavLink to="user" />}
-            className="nav-link font-medium text-lg"
-          >
-            User
-          </MenuItem>
+          {isAuthenticated && (
+            <MenuItem
+              icon={<FaUser />}
+              component={<NavLink to="user" />}
+              className="nav-link font-medium text-lg"
+            >
+              User
+            </MenuItem>
+          )}
           <SubMenu
             label="Admin"
             icon={<MdAdminPanelSettings />}

@@ -3,9 +3,9 @@ import Navbar from "react-bootstrap/Navbar";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
 import { HomeSidebar } from "./HomeSideBar";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
-
+import { commitLogOut } from "../redux/actions/userAction";
 function Header() {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const account = useSelector((state) => state.user.account);
@@ -13,12 +13,17 @@ function Header() {
   const [openHomeSideBar, setOpenHomeSideBar] = useState(true);
   const [openDropDown, setOpenDropDown] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const handleLogin = () => {
     navigate("login");
   };
+  const handleLogOut = () => {
+    dispatch(commitLogOut());
+  };
   return (
     <>
-      <Navbar expand="sm" className="sticky top-0 bg-white px-[7%]">
+      <Navbar expand="sm" className="sticky top-0 bg-white px-[7%] z-10">
         {openHomeSideBar && <HomeSidebar />}
         <Link
           to="/"
@@ -78,6 +83,7 @@ function Header() {
                     }`}
                   >
                     <Link
+                      onClick={() => handleLogOut()}
                       to="login"
                       className="px-8 py-2 text-black no-underline hover:bg-gray-200"
                     >
