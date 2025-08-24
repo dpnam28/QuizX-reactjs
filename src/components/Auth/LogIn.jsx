@@ -4,15 +4,18 @@ import { postLogIn } from "../../services/apiServices";
 import { LuEyeClosed, LuEye } from "react-icons/lu";
 import { toast } from "react-toastify";
 import { commitLogin } from "../../redux/actions/userAction";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { FaSpinner } from "react-icons/fa";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isShowPassword, setIsShowPassword] = useState(false);
+  const [isLoadingLogIn, setIsLoadingLogIn] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const validateEmail = (email) => {
     return String(email)
       .toLowerCase()
@@ -27,26 +30,31 @@ const Login = () => {
   };
 
   const handleLoginBtn = async () => {
+    setIsLoadingLogIn(true);
     if (validateEmail(email)) {
       if (password) {
         let res = await postLogIn(email, password);
         if (res?.EC === 0) {
+          setIsLoadingLogIn(false);
           dispatch(commitLogin(res));
           toast.success(res?.EM ?? "Succeeded", {
             closeOnClick: true,
           });
           navigate("/");
         } else {
+          setIsLoadingLogIn(false);
           toast.warn(res?.EM ?? "Error form server", {
             closeOnClick: true,
           });
         }
       } else {
+        setIsLoadingLogIn(false);
         toast.warn("Missing password", {
           closeOnClick: true,
         });
       }
     } else {
+      setIsLoadingLogIn(false);
       toast.warn("Invalid email", {
         closeOnClick: true,
       });
@@ -139,12 +147,16 @@ const Login = () => {
                 </a>
               </div>
 
-              <div className="mt-4">
+              <div className="mt-4 relative">
                 <button
                   type="button"
                   onClick={() => handleLoginBtn()}
-                  className="bg-black text-white text-center text-xl font-bold w-[100%] rounded-md py-2"
+                  className="bg-black text-white text-center text-xl font-bold w-[100%] rounded-md py-2 disabled:bg-gray-500 disabled:cursor-not-allowed"
+                  disabled={isLoadingLogIn}
                 >
+                  {isLoadingLogIn && (
+                    <FaSpinner className="absolute left-1/3 top-1/3 animate-spin" />
+                  )}
                   Log in
                 </button>
               </div>

@@ -79,14 +79,14 @@ function Header() {
                   >
                     <Link
                       to="login"
-                      className="px-10 py-2 text-black no-underline hover:bg-gray-200"
+                      className="px-8 py-2 text-black no-underline hover:bg-gray-200"
                     >
                       Log out
                     </Link>
                     <div className="border border-gray-200"></div>
                     <a
                       href=""
-                      className="px-10 py-2 text-black no-underline hover:bg-gray-200"
+                      className="px-8 py-2 text-black no-underline hover:bg-gray-200"
                     >
                       Information
                     </a>
