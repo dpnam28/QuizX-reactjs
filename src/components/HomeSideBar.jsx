@@ -26,6 +26,7 @@ export const HomeSidebar = () => {
         collapsed={collapsed}
         onBackdropClick={() => setCollapsed(false)}
         backgroundColor="#fff"
+        className={`sm:block ${collapsed ? "block" : "hidden"}`}
       >
         <Menu>
           <MenuItem

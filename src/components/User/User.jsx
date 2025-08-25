@@ -6,7 +6,7 @@ const User = (props) => {
       <div className="text-center text-5xl text-black font-black">
         User page
       </div>
-      <div className="mx-[10%] mt-5">
+      <div className="mx-[10%] my-15">
         <ListQuiz />
       </div>
     </div>

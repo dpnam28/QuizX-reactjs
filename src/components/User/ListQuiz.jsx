@@ -2,9 +2,11 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { getQuizByUser } from "../../services/apiServices";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ListQuiz = () => {
   const [listQuiz, setListQuiz] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getQuiz();
@@ -20,10 +22,7 @@ const ListQuiz = () => {
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 place-items-center lg:gap-15 md:gap-8 gap-5">
       {listQuiz.length > 0 ? (
         listQuiz.map((quiz) => (
-          <Card
-            className="md:w-70 md:h-100 w-50 h-90 z-0 cursor-pointer"
-            key={quiz.id}
-          >
+          <Card className="md:w-70 w-50 h-90 z-0 cursor-pointer" key={quiz.id}>
             <Card.Img
               variant="top"
               src={`data:image/jpeg;base64,${quiz.image}`}
@@ -34,7 +33,14 @@ const ListQuiz = () => {
               <Card.Text className="text-sm">
                 {quiz?.description ?? ""}
               </Card.Text>
-              <Button variant="primary">Go somewhere</Button>
+              <Button
+                variant="primary"
+                onClick={() => {
+                  navigate(`/quiz/${quiz.id}`);
+                }}
+              >
+                Start
+              </Button>
             </Card.Body>
           </Card>
         ))
