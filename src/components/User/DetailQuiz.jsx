@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { getQuestionsByQuizId } from "../../services/apiServices";
 import _, { result } from "lodash";
 import { useNavigate } from "react-router-dom";
+import { postSubmitAnswer } from "../../services/apiServices";
+import ModalResult from "./Modal/ModalResult";
 const DetailQuiz = () => {
   const param = useParams();
   const navigate = useNavigate();
@@ -10,6 +12,8 @@ const DetailQuiz = () => {
 
   const [listQuestions, setListQuestions] = useState([]);
   const [indexQuestion, setIndexQuestion] = useState(0);
+  const [showModalResult, setShowModalResult] = useState(false);
+  const [dataForModalResult, setDataForModalResult] = useState([]);
   useEffect(() => {
     fetchQuestion();
   }, [quizId]);
@@ -56,6 +60,35 @@ const DetailQuiz = () => {
     }
     setIndexQuestion(indexQuestion + 1);
   };
+  const finishBtn = async () => {
+    if (listQuestions && listQuestions.length > 0) {
+      let data = {
+        quizId: +quizId,
+        answers: [],
+      };
+
+      data.answers = listQuestions.map((item) => {
+        let tmp = [];
+        item.answers?.forEach((ans) => {
+          if (ans.isSlected) {
+            tmp.push(ans.id);
+          }
+        });
+        return {
+          questionId: +item.questionId,
+          userAnswerId: tmp,
+        };
+      });
+
+      let res = await postSubmitAnswer(data);
+      if (res?.EC === 0) {
+        setShowModalResult(true);
+        setDataForModalResult(res.DT);
+      }
+    } else {
+      return;
+    }
+  };
 
   const handleCheckBtn = (answerId, questionId) => {
     let cloneListQuestions = _.cloneDeep(listQuestions);
@@ -64,9 +97,12 @@ const DetailQuiz = () => {
     );
     if (question) {
       question.answers = question.answers.map((ans) => {
-        +ans.id === +answerId
-          ? (ans.isSlected = true)
-          : (ans.isSlected = false);
+        // +ans.id === +answerId
+        //   ? (ans.isSlected = true)
+        //   : (ans.isSlected = false);
+        if (+ans.id === +answerId) {
+          ans.isSlected = !ans.isSlected;
+        }
         return ans;
       });
       setListQuestions(cloneListQuestions);
@@ -76,6 +112,7 @@ const DetailQuiz = () => {
   };
   return (
     <>
+      {/* go back */}
       <div className="mt-2">
         <div
           className="float-left ml-2 text-md absolute top-1 cursor-pointer"
@@ -114,8 +151,8 @@ const DetailQuiz = () => {
                     listQuestions[indexQuestion]?.answers.map((item) => (
                       <div key={item.id}>
                         <input
-                          type="radio"
-                          name="answer"
+                          type="checkbox"
+                          // name="answer"
                           checked={item?.isSlected ?? false}
                           onChange={() =>
                             handleCheckBtn(
@@ -135,20 +172,29 @@ const DetailQuiz = () => {
               {/* button */}
               <div className="flex gap-5 justify-center mt-5">
                 <button
-                  className="bg-gray-500 px-5 py-2  disabled:bg-gray-300 text-white text-md font-semibold rounded-md"
+                  className="bg-gray-500 px-5 py-2  disabled:bg-gray-200 text-white text-md font-semibold rounded-md"
                   onClick={() => prevBtn()}
                   disabled={indexQuestion <= 0 ? true : false}
                 >
                   Prev
                 </button>
                 <button
-                  className="bg-blue-500 px-5 py-2 disabled:bg-blue-300 text-white text-md font-semibold rounded-md"
+                  className="bg-blue-500 px-5 py-2 disabled:bg-blue-200 text-white text-md font-semibold rounded-md"
                   onClick={() => nextBtn()}
                   disabled={
                     indexQuestion >= listQuestions.length - 1 ? true : false
                   }
                 >
                   Next
+                </button>
+                <button
+                  className="bg-amber-500 px-5 py-2 disabled:bg-amber-200 text-white text-md font-semibold rounded-md"
+                  onClick={() => finishBtn()}
+                  // disabled={
+                  //   indexQuestion >= listQuestions.length - 1 ? false : true
+                  // }
+                >
+                  Finish
                 </button>
               </div>
             </div>
@@ -161,6 +207,12 @@ const DetailQuiz = () => {
         "
         ></div>
       </div>
+
+      <ModalResult
+        show={showModalResult}
+        setShow={setShowModalResult}
+        dataResult={dataForModalResult}
+      />
     </>
   );
 };
