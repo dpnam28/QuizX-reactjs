@@ -26,7 +26,7 @@ export const HomeSidebar = () => {
         collapsed={collapsed}
         onBackdropClick={() => setCollapsed(false)}
         backgroundColor="#fff"
-        className={`sm:block ${collapsed ? "block" : "hidden"}`}
+        className={`border-none sm:block ${collapsed ? "block" : "hidden"}`}
       >
         <Menu>
           <MenuItem
@@ -61,6 +61,12 @@ export const HomeSidebar = () => {
               component={<Link to="admin/manage-users" />}
             >
               Manage Users
+            </MenuItem>
+            <MenuItem
+              className="font-medium text-sm"
+              component={<Link to="admin/manage-quiz" />}
+            >
+              Manage Quiz
             </MenuItem>
           </SubMenu>
         </Menu>

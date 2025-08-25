@@ -1,13 +1,13 @@
 import {
   getAllUsers,
   getListUserWithPagination,
-} from "../../services/apiServices";
+} from "../../../services/apiServices";
 import { useEffect, useState } from "react";
-import ModalCreate from "./Modal/ModalCreate";
-import AllUserTable from "./Table/AllUserTable";
-import ModalUpdate from "./Modal/ModalUpdate";
-import ModalView from "./Modal/ModalView";
-import ModalDelete from "./Modal/ModalDelete";
+import ModalCreate from "../Modal/ModalCreate";
+import AllUserTable from "../Table/AllUserTable";
+import ModalUpdate from "../Modal/ModalUpdate";
+import ModalView from "../Modal/ModalView";
+import ModalDelete from "../Modal/ModalDelete";
 
 const ManageUsers = (props) => {
   const LIMIT_PER_PAGE = 5;
