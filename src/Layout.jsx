@@ -3,7 +3,8 @@ import { Route, Routes } from "react-router";
 import User from "./components/User/User.jsx";
 import { HomePage } from "./components/HomePage.jsx";
 import DashBoard from "./components/Admin/DashBoard.jsx";
-import ManageUsers from "./components/Admin/ManageUsers.jsx";
+import ManageUsers from "./components/Admin/ManageUsers/ManageUsers.jsx";
+import ManageQuiz from "./components/Admin/ManageQuiz/ManageQuiz.jsx";
 import Login from "./components/Auth/LogIn.jsx";
 import Help from "./components/Auth/Help.jsx";
 import SignUp from "./components/Auth/Signup.jsx";
@@ -21,6 +22,7 @@ const Layout = () => {
           <Route path="admin">
             <Route index element={<DashBoard />}></Route>
             <Route path="manage-users" element={<ManageUsers />}></Route>
+            <Route path="manage-quiz" element={<ManageQuiz />}></Route>
           </Route>
         </Route>
 
