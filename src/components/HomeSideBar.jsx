@@ -68,6 +68,12 @@ export const HomeSidebar = () => {
             >
               Manage Quiz
             </MenuItem>
+            <MenuItem
+              className="font-medium text-sm"
+              component={<Link to="admin/manage-questions" />}
+            >
+              Manage Questions
+            </MenuItem>
           </SubMenu>
         </Menu>
       </Sidebar>

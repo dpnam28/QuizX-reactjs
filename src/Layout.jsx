@@ -10,6 +10,7 @@ import Help from "./components/Auth/Help.jsx";
 import SignUp from "./components/Auth/Signup.jsx";
 import DetailQuiz from "./components/User/DetailQuiz.jsx";
 import NotFound from "./components/NotFound.jsx";
+import ManageQuestions from "./components/Admin/MangeQuestions/ManageQuestions.jsx";
 import { ToastContainer, Bounce } from "react-toastify";
 
 const Layout = () => {
@@ -23,6 +24,10 @@ const Layout = () => {
             <Route index element={<DashBoard />}></Route>
             <Route path="manage-users" element={<ManageUsers />}></Route>
             <Route path="manage-quiz" element={<ManageQuiz />}></Route>
+            <Route
+              path="manage-questions"
+              element={<ManageQuestions />}
+            ></Route>
           </Route>
         </Route>
 
