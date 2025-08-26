@@ -46,3 +46,28 @@ export const getQuestionsByQuizId = (id) => {
 export const postSubmitAnswer = (data) => {
   return axios.post(`api/v1/quiz-submit`, { ...data });
 };
+export const postCreateQuiz = (description, name, difficulty, quizImage) => {
+  let data = new FormData();
+  data.append("description", description);
+  data.append("name", name);
+  data.append("difficulty", difficulty);
+  data.append("quizImage", quizImage);
+  return axios.post("api/v1/quiz", data);
+};
+export const getAllQuizForAdmin = () => {
+  return axios.get("api/v1/quiz/all");
+};
+
+export const deleteQuizById = (id) => {
+  return axios.delete(`api/v1/quiz/${id}`);
+};
+
+export const putUpdateQuiz = (id, description, name, difficulty, quizImage) => {
+  let data = new FormData();
+  data.append("id", id);
+  data.append("description", description);
+  data.append("difficulty", difficulty);
+  data.append("name", name);
+  data.append("quizImage", quizImage);
+  return axios.put(`api/v1/quiz`, data);
+};
