@@ -1,8 +1,6 @@
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import ReactPaginate from "react-paginate";
-import ReactDOM from "react-dom";
-import React, { useEffect, useState } from "react";
 import _ from "lodash";
 
 function AllUserTable(props) {

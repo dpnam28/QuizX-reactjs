@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import _ from "lodash";
-import { deleteUserById } from "../../../services/apiServices";
+import { deleteUserById } from "../../../../services/apiServices";
 import { toast } from "react-toastify";
 function ModalDelete(props) {
   const {
