@@ -18,7 +18,7 @@ import Lightbox from "react-awesome-lightbox";
 import { toast } from "react-toastify";
 
 const ManageQuestions = () => {
-  const [questions, setQuestions] = useState([
+  const initQuestion = [
     {
       id: uuidv4(),
       description: "",
@@ -32,7 +32,9 @@ const ManageQuestions = () => {
         },
       ],
     },
-  ]);
+  ];
+
+  const [questions, setQuestions] = useState(initQuestion);
   const [openLightBox, setOpenLightBox] = useState(false);
   const [lightBoxImg, setLightBoxImg] = useState("");
   const [listQuiz, setListQuiz] = useState([]);
@@ -168,24 +170,55 @@ const ManageQuestions = () => {
       toast.warn("Missing quiz value", { closeOnClick: true });
       return;
     }
-    await Promise.all(
-      questions.map(async (ques) => {
-        const tmp = await postCreateQuestionForQuiz(
-          +quizSelected.value,
-          ques.description,
-          ques.imageFile
-        );
-        await Promise.all(
-          ques.answers.map(async (ans) => {
-            await postAnswerForQuestion(
-              ans.description,
-              ans.isCorrect,
-              tmp.DT.id
-            );
-          })
-        );
-      })
-    );
+
+    let isAnswerValid = true;
+    let indexAnswerMissing = -1;
+    let indexQuestionOfAnswerMissing = -1;
+    for (let i = 0; i < questions.length; i++) {
+      if (!questions[i].description) {
+        isAnswerValid = false;
+        toast.warn(`Missing question ${i + 1}'s description`, {
+          closeOnClick: true,
+        });
+        return;
+      } else {
+        for (let j = 0; j < questions[i].answers.length; j++) {
+          if (!questions[i].answers[j].description) {
+            indexAnswerMissing = j;
+            isAnswerValid = false;
+            break;
+          }
+        }
+        indexQuestionOfAnswerMissing = i;
+        if (!isAnswerValid) break;
+      }
+    }
+    if (!isAnswerValid) {
+      toast.warn(
+        `Missing description of answer ${indexAnswerMissing + 1} at question ${
+          indexQuestionOfAnswerMissing + 1
+        }`,
+        {
+          closeOnClick: true,
+        }
+      );
+      return;
+    }
+    for (const ques of questions) {
+      const tmp = await postCreateQuestionForQuiz(
+        +quizSelected.value,
+        ques.description,
+        ques.imageFile
+      );
+
+      for (const ans of ques.answers) {
+        await postAnswerForQuestion(ans.description, ans.isCorrect, tmp.DT.id);
+      }
+    }
+    toast.success("Create questions and answers successfully", {
+      closeOnClick: true,
+    });
+    setQuestions(initQuestion);
   };
   return (
     <>
@@ -198,10 +231,12 @@ const ManageQuestions = () => {
         <Form.Label>Choose quiz</Form.Label>
         <Form.Select
           aria-label="Floating label select example"
-          value={quizSelected.value}
+          value={quizSelected?.value ?? ""}
           onChange={(e) => handleSelectQuiz(+e.target.value)}
         >
-          <option value={null}>Choose quiz...</option>
+          <option value={""} disabled hidden>
+            Choose quiz...
+          </option>
           {!_.isEmpty(listQuiz) &&
             listQuiz.map((item) => (
               <option value={item?.value ?? null} key={item.value}>
