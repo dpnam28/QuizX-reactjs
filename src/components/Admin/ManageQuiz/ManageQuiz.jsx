@@ -9,6 +9,7 @@ import {
 } from "../../../services/apiServices";
 import { toast } from "react-toastify";
 import TableQuiz from "./TableQuiz";
+import AssignQuizForUser from "./AssignQuizForUser";
 
 const levelOptions = [
   { value: "EASY", label: "EASY" },
@@ -66,10 +67,10 @@ const ManageQuiz = () => {
         Manage Quiz
       </div>
       <div className="container mx-auto mt-10">
-        <Accordion defaultActiveKey="0">
+        <Accordion>
           <Accordion.Item
             eventKey="0"
-            className="mx-auto w-[80%] max-w-200 relative"
+            className="mx-auto w-[80%] max-w-270 relative"
           >
             <Accordion.Header>Add new quiz</Accordion.Header>
             <Accordion.Body>
@@ -158,16 +159,25 @@ const ManageQuiz = () => {
                   </Button>
                 </fieldset>
               </div>
+              {/* table quiz */}
+              <div className="text-center mt-8">
+                <TableQuiz
+                  listQuiz={listQuiz}
+                  setListQuiz={setListQuiz}
+                  fetchAllQuiz={fetchAllQuiz}
+                />
+              </div>
             </Accordion.Body>
           </Accordion.Item>
-          {/* table quiz */}
-          <div className="text-center w-[80%] mx-auto my-10">
-            <TableQuiz
-              listQuiz={listQuiz}
-              setListQuiz={setListQuiz}
-              fetchAllQuiz={fetchAllQuiz}
-            />
-          </div>
+          <Accordion.Item
+            eventKey="1"
+            className="mx-auto w-[80%] max-w-270 relative"
+          >
+            <Accordion.Header>Assign quiz for user</Accordion.Header>
+            <Accordion.Body>
+              <AssignQuizForUser />
+            </Accordion.Body>
+          </Accordion.Item>
         </Accordion>
       </div>
     </>
