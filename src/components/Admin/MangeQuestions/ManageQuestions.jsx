@@ -38,7 +38,7 @@ const ManageQuestions = () => {
   const [openLightBox, setOpenLightBox] = useState(false);
   const [lightBoxImg, setLightBoxImg] = useState("");
   const [listQuiz, setListQuiz] = useState([]);
-  const [quizSelected, setQuizSelected] = useState([]);
+  const [quizSelected, setQuizSelected] = useState("");
 
   useEffect(() => {
     fetchAllQuiz();
