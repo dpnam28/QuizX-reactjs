@@ -7,8 +7,15 @@ import Row from "react-bootstrap/Row";
 import { AiOutlinePicture } from "react-icons/ai";
 import { CiSquarePlus, CiSquareMinus } from "react-icons/ci";
 import { v4 as uuidv4 } from "uuid";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import _ from "lodash";
+import {
+  getAllQuizForAdmin,
+  postCreateQuestionForQuiz,
+  postAnswerForQuestion,
+} from "../../../services/apiServices";
+import Lightbox from "react-awesome-lightbox";
+import { toast } from "react-toastify";
 
 const ManageQuestions = () => {
   const [questions, setQuestions] = useState([
@@ -26,7 +33,25 @@ const ManageQuestions = () => {
       ],
     },
   ]);
+  const [openLightBox, setOpenLightBox] = useState(false);
+  const [lightBoxImg, setLightBoxImg] = useState("");
+  const [listQuiz, setListQuiz] = useState([]);
+  const [quizSelected, setQuizSelected] = useState([]);
 
+  useEffect(() => {
+    fetchAllQuiz();
+  }, []);
+
+  const fetchAllQuiz = async () => {
+    let res = await getAllQuizForAdmin();
+    if (res?.EC === 0) {
+      let tmp = res.DT.map((item) => ({
+        value: item.id,
+        label: `${item.id} - ${item.description}`,
+      }));
+      setListQuiz(tmp);
+    }
+  };
   const handleAddOrRemoveQuestion = (type, id) => {
     if (!id) return;
     switch (type) {
@@ -134,8 +159,33 @@ const ManageQuestions = () => {
     cloneQuestions[index].imageName = img.name;
     setQuestions(cloneQuestions);
   };
-  const handleSaveQuestion = () => {
-    console.log(questions);
+  const handleSelectQuiz = (id) => {
+    let tmp = listQuiz.find((item) => item.value === id);
+    setQuizSelected(tmp);
+  };
+  const handleSaveQuestion = async () => {
+    if (!quizSelected.value) {
+      toast.warn("Missing quiz value", { closeOnClick: true });
+      return;
+    }
+    await Promise.all(
+      questions.map(async (ques) => {
+        const tmp = await postCreateQuestionForQuiz(
+          +quizSelected.value,
+          ques.description,
+          ques.imageFile
+        );
+        await Promise.all(
+          ques.answers.map(async (ans) => {
+            await postAnswerForQuestion(
+              ans.description,
+              ans.isCorrect,
+              tmp.DT.id
+            );
+          })
+        );
+      })
+    );
   };
   return (
     <>
@@ -146,10 +196,18 @@ const ManageQuestions = () => {
       <div className="container mx-auto w-[80%] max-w-200 mb-15">
         {/* Quiz section */}
         <Form.Label>Choose quiz</Form.Label>
-        <Form.Select aria-label="Floating label select example">
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+        <Form.Select
+          aria-label="Floating label select example"
+          value={quizSelected.value}
+          onChange={(e) => handleSelectQuiz(+e.target.value)}
+        >
+          <option value={null}>Choose quiz...</option>
+          {!_.isEmpty(listQuiz) &&
+            listQuiz.map((item) => (
+              <option value={item?.value ?? null} key={item.value}>
+                {item?.label ?? ""}
+              </option>
+            ))}
         </Form.Select>
 
         {/* Question section */}
@@ -173,13 +231,23 @@ const ManageQuestions = () => {
                   />
                 </Form.Group>
                 <Form.Group className="mt-3 relative flex" as={Col} md="6">
+                  <span>
+                    <AiOutlinePicture
+                      className="text-blue-500 text-[27px] mr-2 cursor-pointer"
+                      onClick={() => {
+                        setOpenLightBox(true);
+                        setLightBoxImg(
+                          ques.imageFile
+                            ? URL.createObjectURL(ques.imageFile)
+                            : ""
+                        );
+                      }}
+                    />
+                  </span>
                   <Form.Label
                     className="flex cursor-pointer mr-10"
                     htmlFor={ques.id}
                   >
-                    <span>
-                      <AiOutlinePicture className="text-blue-500 text-[27px] mr-2" />
-                    </span>
                     <span className="max-w-30">
                       {ques.imageName ? ques.imageName : "0 file is uploaded"}
                     </span>
@@ -270,6 +338,15 @@ const ManageQuestions = () => {
           Save
         </Button>
       </div>
+      {openLightBox && (
+        <Lightbox
+          image={lightBoxImg ? lightBoxImg : "image"}
+          title={"image"}
+          onClose={() => {
+            setOpenLightBox(false);
+          }}
+        ></Lightbox>
+      )}
     </>
   );
 };

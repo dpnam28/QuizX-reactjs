@@ -6,6 +6,7 @@ import Layout from "./Layout.jsx";
 import { Provider } from "react-redux";
 import { reduxStore, persistor } from "./redux/store.jsx";
 import "nprogress/nprogress.css";
+import "react-awesome-lightbox/build/style.css";
 import { PersistGate } from "redux-persist/integration/react";
 
 createRoot(document.getElementById("root")).render(

@@ -71,3 +71,22 @@ export const putUpdateQuiz = (id, description, name, difficulty, quizImage) => {
   data.append("quizImage", quizImage);
   return axios.put(`api/v1/quiz`, data);
 };
+export const postCreateQuestionForQuiz = (id, description, questionImage) => {
+  let data = new FormData();
+  data.append("quiz_id", id);
+  data.append("description", description);
+  data.append("questionImage", questionImage);
+  return axios.post(`api/v1/question`, data);
+};
+
+export const postAnswerForQuestion = (
+  description,
+  correct_answer,
+  question_id
+) => {
+  return axios.post("api/v1/answer", {
+    description,
+    correct_answer,
+    question_id,
+  });
+};
