@@ -105,19 +105,24 @@ const ManageQuiz = () => {
                   </FloatingLabel>
 
                   {/* choose level */}
-                  <Form.Select
-                    aria-label="Default select example"
-                    className="mt-3"
-                    value={level}
-                    onChange={(e) => setLevel(e.target.value)}
+                  <FloatingLabel
+                    controlId="floatingSelect"
+                    label="Choose difficulty"
                   >
-                    {levelOptions.length > 0 &&
-                      levelOptions.map((item) => (
-                        <option value={item.value} key={item.value}>
-                          {item.label}
-                        </option>
-                      ))}
-                  </Form.Select>
+                    <Form.Select
+                      aria-label="Default select example"
+                      className="mt-3"
+                      value={level}
+                      onChange={(e) => setLevel(e.target.value)}
+                    >
+                      {levelOptions.length > 0 &&
+                        levelOptions.map((item) => (
+                          <option value={item.value} key={item.value}>
+                            {item.label}
+                          </option>
+                        ))}
+                    </Form.Select>
+                  </FloatingLabel>
 
                   {/* choose image */}
                   <Form.Group className="position-relative mt-3">
