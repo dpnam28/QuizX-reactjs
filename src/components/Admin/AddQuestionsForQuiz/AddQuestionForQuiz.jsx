@@ -17,7 +17,7 @@ import {
 import Lightbox from "react-awesome-lightbox";
 import { toast } from "react-toastify";
 
-const ManageQuestions = () => {
+const AddQuestionForQuiz = () => {
   const initQuestion = [
     {
       id: uuidv4(),
@@ -223,7 +223,7 @@ const ManageQuestions = () => {
   return (
     <>
       <div className="text-center sm:text-4xl text-2xl text-black font-black my-10">
-        Questions management
+        Questions For Quiz
       </div>
 
       <div className="container mx-auto w-[80%] max-w-200 mb-15">
@@ -385,4 +385,4 @@ const ManageQuestions = () => {
     </>
   );
 };
-export default ManageQuestions;
+export default AddQuestionForQuiz;

@@ -70,9 +70,9 @@ export const HomeSidebar = () => {
             </MenuItem>
             <MenuItem
               className="font-medium text-sm"
-              component={<Link to="admin/manage-questions" />}
+              component={<Link to="admin/create-question" />}
             >
-              Manage Questions
+              Create Questions
             </MenuItem>
           </SubMenu>
         </Menu>
