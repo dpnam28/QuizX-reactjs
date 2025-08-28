@@ -53,14 +53,14 @@ const ModalUpdateQuiz = ({ show, handleClose, quizSelected, fetchAllQuiz }) => {
       let res = await putUpdateQuiz(
         quizSelected.id,
         description,
-        difficulty,
         quizName,
+        difficulty,
         image
       );
 
       if (res?.EC === 0) {
         handleClose();
-        fetchAllQuiz;
+        fetchAllQuiz();
         toast.success(res.EM, {
           closeOnClick: true,
         });
