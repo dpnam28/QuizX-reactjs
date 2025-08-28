@@ -3,16 +3,23 @@ import { Row, Col, Button } from "react-bootstrap";
 import { getAllQuizForAdmin, getAllUsers } from "../../../services/apiServices";
 import { useState, useEffect } from "react";
 import _ from "lodash";
-const AssignQuizForUser = () => {
-  const [listQuiz, setListQuiz] = useState([]);
+import { postAssignQuizToUser } from "../../../services/apiServices";
+import { toast } from "react-toastify";
+import { v4 as uuidv4 } from "uuid";
+
+const AssignQuizForUser = ({ listQuiz, setListQuiz }) => {
   const [listAllUsers, setListAllUsers] = useState([]);
   const [quizSelected, setQuizSelected] = useState("");
   const [userSelected, setUserSelected] = useState("");
+  const [listQuizForAssign, setListQuizForAssign] = useState([]);
 
   useEffect(() => {
-    fetchAllQuiz();
     fetchListUser();
   }, []);
+
+  useEffect(() => {
+    modifyListQuiz();
+  }, [listQuiz]);
 
   let fetchListUser = async () => {
     let res = await getAllUsers();
@@ -24,19 +31,30 @@ const AssignQuizForUser = () => {
       setListAllUsers(tmp);
     }
   };
-  const fetchAllQuiz = async () => {
-    let res = await getAllQuizForAdmin();
+  const modifyListQuiz = () => {
+    let tmp = listQuiz.map((item) => ({
+      value: item.id,
+      label: `${item.id} - ${item.description}`,
+    }));
+    setListQuizForAssign(tmp);
+  };
+
+  const handleAssign = async () => {
+    if (!quizSelected || !userSelected) {
+      toast.warn("Missing parameter", { closeOnClick: true });
+      return;
+    }
+    let res = await postAssignQuizToUser(quizSelected, userSelected);
     if (res?.EC === 0) {
-      let tmp = res.DT.map((item) => ({
-        value: item.id,
-        label: `${item.id} - ${item.description}`,
-      }));
-      setListQuiz(tmp);
+      toast.success(res?.EM ?? "Succeeded", { closeOnClick: true });
+      setQuizSelected("");
+      setUserSelected("");
     }
   };
   return (
     <>
       <Row>
+        {/* Choose quiz section */}
         <Form.Group as={Col} md="6">
           <Form.Label>Choose quiz</Form.Label>
           <Form.Select
@@ -46,14 +64,16 @@ const AssignQuizForUser = () => {
             <option value={""} disabled hidden>
               Choose quiz...
             </option>
-            {!_.isEmpty(listQuiz) &&
-              listQuiz.map((item) => (
-                <option value={item.value} key={item.value}>
+            {!_.isEmpty(listQuizForAssign) &&
+              listQuizForAssign.map((item) => (
+                <option value={item.value} key={item?.value ?? uuidv4()}>
                   {item.label}
                 </option>
               ))}
           </Form.Select>
         </Form.Group>
+
+        {/* Choose user section */}
         <Form.Group as={Col} md="6">
           <Form.Label>Choose user</Form.Label>
           <Form.Select
@@ -72,8 +92,12 @@ const AssignQuizForUser = () => {
           </Form.Select>
         </Form.Group>
       </Row>
-      <Button variant="dark" className="w-20 mt-3 mx-auto">
-        Add
+      <Button
+        variant="dark"
+        className="w-20 mt-3 mx-auto"
+        onClick={() => handleAssign()}
+      >
+        Assign
       </Button>
     </>
   );

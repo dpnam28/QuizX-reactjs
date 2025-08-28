@@ -90,3 +90,7 @@ export const postAnswerForQuestion = (
     question_id,
   });
 };
+
+export const postAssignQuizToUser = (quizId, userId) => {
+  return axios.post("api/v1/quiz-assign-to-user", { quizId, userId });
+};
