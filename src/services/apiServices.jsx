@@ -1,3 +1,4 @@
+import { data } from "react-router-dom";
 import axios from "../utils/axiosCustomize";
 export const createNewParticipant = (
   email,
@@ -57,11 +58,9 @@ export const postCreateQuiz = (description, name, difficulty, quizImage) => {
 export const getAllQuizForAdmin = () => {
   return axios.get("api/v1/quiz/all");
 };
-
 export const deleteQuizById = (id) => {
   return axios.delete(`api/v1/quiz/${id}`);
 };
-
 export const putUpdateQuiz = (id, description, name, difficulty, quizImage) => {
   let data = new FormData();
   data.append("id", id);
@@ -78,7 +77,6 @@ export const postCreateQuestionForQuiz = (id, description, questionImage) => {
   data.append("questionImage", questionImage);
   return axios.post(`api/v1/question`, data);
 };
-
 export const postAnswerForQuestion = (
   description,
   correct_answer,
@@ -90,7 +88,33 @@ export const postAnswerForQuestion = (
     question_id,
   });
 };
-
 export const postAssignQuizToUser = (quizId, userId) => {
   return axios.post("api/v1/quiz-assign-to-user", { quizId, userId });
+};
+export const getQuizWithQuestionAnswer = (id) => {
+  return axios.get(`api/v1/quiz-with-qa/${id}`);
+};
+export const putUpdateQuestion = (id, quiz_id, description, questionImage) => {
+  let data = new FormData();
+  data.append("id", id);
+  data.append("quiz_id", quiz_id);
+  data.append("description", description);
+  data.append("questionImage", questionImage);
+  return axios.put("api/v1/question", data);
+};
+export const putUpdateAnswer = (
+  description,
+  correct_answer,
+  question_id,
+  answer_id
+) => {
+  return axios.put("api/v1/answer", {
+    description,
+    correct_answer,
+    question_id,
+    answer_id,
+  });
+};
+export const postUpsertQuestionAnswer = (data) => {
+  return axios.post("api/v1/quiz-upsert-qa", { ...data });
 };
