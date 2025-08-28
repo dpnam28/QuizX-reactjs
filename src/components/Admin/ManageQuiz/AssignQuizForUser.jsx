@@ -49,6 +49,8 @@ const AssignQuizForUser = ({ listQuiz, setListQuiz }) => {
       toast.success(res?.EM ?? "Succeeded", { closeOnClick: true });
       setQuizSelected("");
       setUserSelected("");
+    } else {
+      toast.warn(res?.EM ?? "Error", { closeOnClick: true });
     }
   };
   return (

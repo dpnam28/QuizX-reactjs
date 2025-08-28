@@ -10,6 +10,7 @@ import {
 import { toast } from "react-toastify";
 import TableQuiz from "./TableQuiz";
 import AssignQuizForUser from "./AssignQuizForUser";
+import ModifyQuestionsAndAnswer from "./ModifyQuesionsAndAnswer";
 
 const levelOptions = [
   { value: "EASY", label: "EASY" },
@@ -68,6 +69,7 @@ const ManageQuiz = () => {
       </div>
       <div className="container mx-auto mt-10">
         <Accordion>
+          {/* Add Quiz */}
           <Accordion.Item
             eventKey="0"
             className="mx-auto w-[80%] max-w-270 relative"
@@ -169,13 +171,29 @@ const ManageQuiz = () => {
               </div>
             </Accordion.Body>
           </Accordion.Item>
+
+          {/* Modify Ques and Ans */}
+          <Accordion.Item
+            eventKey="2"
+            className="mx-auto w-[80%] max-w-270 relative"
+          >
+            <Accordion.Header>Modify Question and Answer</Accordion.Header>
+            <Accordion.Body>
+              <ModifyQuestionsAndAnswer />
+            </Accordion.Body>
+          </Accordion.Item>
+
+          {/* Assign quiz for user */}
           <Accordion.Item
             eventKey="1"
             className="mx-auto w-[80%] max-w-270 relative"
           >
             <Accordion.Header>Assign quiz for user</Accordion.Header>
             <Accordion.Body>
-              <AssignQuizForUser />
+              <AssignQuizForUser
+                listQuiz={listQuiz}
+                setListQuiz={setListQuiz}
+              />
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>

@@ -5,6 +5,7 @@ import ModalUpdateQuiz from "./Modal/ModalUpdateQuiz";
 import _ from "lodash";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 const TableQuiz = ({ listQuiz, setListQuiz, fetchAllQuiz }) => {
   const [showModalDelete, setShowModalDelete] = useState(false);
@@ -12,6 +13,9 @@ const TableQuiz = ({ listQuiz, setListQuiz, fetchAllQuiz }) => {
   const [idQuizSelected, setIdQuizSelected] = useState(null);
   const [quizSelected, setquizSelected] = useState([]);
 
+  // useEffect(() => {
+  //   fetchAllQuiz();
+  // }, []);
   const handleOpenModalDelete = (id) => {
     if (id) {
       setShowModalDelete(true);
@@ -44,7 +48,7 @@ const TableQuiz = ({ listQuiz, setListQuiz, fetchAllQuiz }) => {
         <tbody>
           {!_.isEmpty(listQuiz) &&
             listQuiz.map((item) => (
-              <tr key={item.id}>
+              <tr key={item?.id ?? uuidv4()}>
                 <td>{item?.id ?? ""}</td>
                 <td>{item?.name ?? ""}</td>
                 <td>{item?.description ?? ""}</td>
