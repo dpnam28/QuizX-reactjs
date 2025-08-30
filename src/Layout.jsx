@@ -12,6 +12,7 @@ import DetailQuiz from "./components/User/DetailQuiz/DetailQuiz.jsx";
 import NotFound from "./components/NotFound.jsx";
 import { ToastContainer, Bounce } from "react-toastify";
 import AddQuestionForQuiz from "./components/Admin/AddQuestionsForQuiz/AddQuestionForQuiz.jsx";
+import PrivateRoute from "./routes/PrivateRoute.jsx";
 
 const Layout = () => {
   return (
@@ -19,14 +20,46 @@ const Layout = () => {
       <Routes>
         <Route path="" element={<App />}>
           <Route index element={<HomePage />} />
-          <Route path="user" element={<User />} />
+          <Route
+            path="user"
+            element={
+              <PrivateRoute>
+                <User />
+              </PrivateRoute>
+            }
+          />
           <Route path="admin">
-            <Route index element={<DashBoard />}></Route>
-            <Route path="manage-users" element={<ManageUsers />}></Route>
-            <Route path="manage-quiz" element={<ManageQuiz />}></Route>
+            <Route
+              index
+              element={
+                <PrivateRoute>
+                  <DashBoard />
+                </PrivateRoute>
+              }
+            ></Route>
+            <Route
+              path="manage-users"
+              element={
+                <PrivateRoute>
+                  <ManageUsers />
+                </PrivateRoute>
+              }
+            ></Route>
+            <Route
+              path="manage-quiz"
+              element={
+                <PrivateRoute>
+                  <ManageQuiz />
+                </PrivateRoute>
+              }
+            ></Route>
             <Route
               path="create-question"
-              element={<AddQuestionForQuiz />}
+              element={
+                <PrivateRoute>
+                  <AddQuestionForQuiz />
+                </PrivateRoute>
+              }
             ></Route>
           </Route>
         </Route>
