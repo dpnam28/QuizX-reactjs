@@ -6,6 +6,9 @@ import { HomeSidebar } from "./HomeSideBar";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { commitLogOut } from "../redux/actions/userAction";
+import { toast } from "react-toastify";
+import { postLogOut } from "../services/apiServices";
+import _ from "lodash";
 function Header() {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const account = useSelector((state) => state.user.account);
@@ -18,8 +21,18 @@ function Header() {
   const handleLogin = () => {
     navigate("login");
   };
-  const handleLogOut = () => {
-    dispatch(commitLogOut());
+  const handleLogOut = async () => {
+    let res = await postLogOut(account.email, account.refresh_token);
+    if (res?.EC === 0) {
+      dispatch(commitLogOut());
+      toast.success("Log out succeeded", {
+        closeOnClick: true,
+      });
+    } else {
+      toast.warn(res?.EM ?? "Log out error", {
+        closeOnClick: true,
+      });
+    }
   };
   return (
     <>
