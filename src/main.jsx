@@ -1,6 +1,7 @@
 import { createRoot } from "react-dom/client";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
+import "./i18n.jsx";
 import { BrowserRouter } from "react-router-dom";
 import Layout from "./Layout.jsx";
 import { Provider } from "react-redux";

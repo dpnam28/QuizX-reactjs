@@ -13,10 +13,10 @@ import NotFound from "./components/NotFound.jsx";
 import { ToastContainer, Bounce } from "react-toastify";
 import AddQuestionForQuiz from "./components/Admin/AddQuestionsForQuiz/AddQuestionForQuiz.jsx";
 import PrivateRoute from "./routes/PrivateRoute.jsx";
-
+import { Suspense } from "react";
 const Layout = () => {
   return (
-    <>
+    <Suspense fallback="">
       <Routes>
         <Route path="" element={<App />}>
           <Route index element={<HomePage />} />
@@ -83,7 +83,7 @@ const Layout = () => {
         transition={Bounce}
       />
       <ToastContainer />
-    </>
+    </Suspense>
   );
 };
 

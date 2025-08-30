@@ -9,6 +9,7 @@ import { commitLogOut } from "../redux/actions/userAction";
 import { toast } from "react-toastify";
 import { postLogOut } from "../services/apiServices";
 import _ from "lodash";
+import ChangeLanguage from "./ChangeLanguage";
 function Header() {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const account = useSelector((state) => state.user.account);
@@ -53,6 +54,7 @@ function Header() {
         />
         <Navbar.Collapse id="basic-navbar-nav" className="">
           <Nav className="me-auto"></Nav>
+          <ChangeLanguage />
           {!isAuthenticated ? (
             <Nav>
               <button
@@ -71,7 +73,7 @@ function Header() {
               </button>
             </Nav>
           ) : (
-            <>
+            <div className="ml-5">
               <div className="relative cursor-pointer text-center group">
                 <div
                   onClick={() => setOpenDropDown(!openDropDown)}
@@ -112,7 +114,7 @@ function Header() {
                   </div>
                 )}
               </div>
-            </>
+            </div>
           )}
         </Navbar.Collapse>
       </Navbar>

@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { commitLogin } from "../../redux/actions/userAction";
 import { useDispatch, useSelector } from "react-redux";
 import { FaSpinner } from "react-icons/fa";
-
+import ChangeLanguage from "../ChangeLanguage";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -66,13 +66,13 @@ const Login = () => {
         {/* upper content */}
         <div className="mt-2">
           <div
-            className="float-left ml-2 text-md absolute top-1 cursor-pointer"
+            className="float-left ml-2 text-md absolute top-2 cursor-pointer"
             onClick={() => navigate("/")}
           >
             <span className="text-xl font-black">&lt;&lt;</span>{" "}
             <span className="sm:inline hidden">Back to homepage</span>
           </div>
-          <div className="float-right mr-3 text-md">
+          <div className="float-right mr-3 text-md flex items-center">
             <span className="sm:inline hidden">Don't have an account yet?</span>
             <span
               className="border border-gray-900 p-1 px-2 mx-2 cursor-pointer"
@@ -80,7 +80,12 @@ const Login = () => {
             >
               Sign up
             </span>
-            <a href="" className="text-black" onClick={() => navigate("/help")}>
+            <ChangeLanguage />
+            <a
+              href=""
+              className="text-black ml-2"
+              onClick={() => navigate("/help")}
+            >
               Need help?
             </a>
           </div>
