@@ -204,7 +204,11 @@ const DetailQuiz = () => {
           className="border border-gray-300 rounded-xl w-[30%] h-130
         "
         >
-          <Timmer listQuestions={listQuestions} finishQuiz={finishBtn} />
+          <Timmer
+            listQuestions={listQuestions}
+            finishQuiz={finishBtn}
+            setIndexQuestion={setIndexQuestion}
+          />
         </div>
       </div>
 
