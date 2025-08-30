@@ -111,6 +111,9 @@ const Login = () => {
                   placeholder="username@gmail.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") handleLoginBtn();
+                  }}
                 />
               </div>
               <div className="flex flex-col relative">
@@ -124,6 +127,9 @@ const Login = () => {
                   placeholder="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") handleLoginBtn();
+                  }}
                 />
                 {!isShowPassword ? (
                   <LuEyeClosed
