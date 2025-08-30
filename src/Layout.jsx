@@ -8,7 +8,7 @@ import ManageQuiz from "./components/Admin/ManageQuiz/ManageQuiz.jsx";
 import Login from "./components/Auth/LogIn.jsx";
 import Help from "./components/Auth/Help.jsx";
 import SignUp from "./components/Auth/Signup.jsx";
-import DetailQuiz from "./components/User/DetailQuiz.jsx";
+import DetailQuiz from "./components/User/DetailQuiz/DetailQuiz.jsx";
 import NotFound from "./components/NotFound.jsx";
 import { ToastContainer, Bounce } from "react-toastify";
 import AddQuestionForQuiz from "./components/Admin/AddQuestionsForQuiz/AddQuestionForQuiz.jsx";
