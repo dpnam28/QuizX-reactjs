@@ -6,12 +6,14 @@ import _ from "lodash";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { useTranslation } from "react-i18next";
 
 const TableQuiz = ({ listQuiz, setListQuiz, fetchAllQuiz }) => {
   const [showModalDelete, setShowModalDelete] = useState(false);
   const [showModalUpdate, setShowModalUpdate] = useState(false);
   const [idQuizSelected, setIdQuizSelected] = useState(null);
   const [quizSelected, setquizSelected] = useState([]);
+  const { t } = useTranslation();
 
   // useEffect(() => {
   //   fetchAllQuiz();
@@ -39,10 +41,10 @@ const TableQuiz = ({ listQuiz, setListQuiz, fetchAllQuiz }) => {
         <thead>
           <tr>
             <th>ID</th>
-            <th>Quiz's name</th>
-            <th>Description</th>
-            <th>Difficulty</th>
-            <th>Actions</th>
+            <th>{t("admin.quiz-management.quiz-name")}</th>
+            <th>{t("admin.quiz-management.description")}</th>
+            <th>{t("admin.quiz-management.difficulty")}</th>
+            <th>{t("admin.quiz-management.actions")}</th>
           </tr>
         </thead>
         <tbody>
@@ -63,7 +65,7 @@ const TableQuiz = ({ listQuiz, setListQuiz, fetchAllQuiz }) => {
                       handleOpenModalUpdate(item);
                     }}
                   >
-                    Update
+                    {t("admin.quiz-management.update")}
                   </Button>
                   <Button
                     variant="danger"
@@ -74,7 +76,7 @@ const TableQuiz = ({ listQuiz, setListQuiz, fetchAllQuiz }) => {
                       handleOpenModalDelete(item.id);
                     }}
                   >
-                    Delete
+                    {t("admin.quiz-management.delete")}
                   </Button>
                 </td>
               </tr>

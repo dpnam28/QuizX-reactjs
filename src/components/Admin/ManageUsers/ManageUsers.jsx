@@ -8,9 +8,11 @@ import AllUserTable from "./Table/AllUserTable";
 import ModalUpdate from "./Modal/ModalUpdate";
 import ModalView from "./Modal/ModalView";
 import ModalDelete from "./Modal/ModalDelete";
+import { useTranslation } from "react-i18next";
 
 const ManageUsers = (props) => {
   const LIMIT_PER_PAGE = 5;
+  const { t } = useTranslation();
 
   const [currentPage, setCurrentPage] = useState(1);
   const [showModalAddUser, setShowModalAddUser] = useState(false);
@@ -57,7 +59,7 @@ const ManageUsers = (props) => {
   return (
     <div className="container flex flex-col">
       <div className="text-center md:text-5xl text-4xl text-black font-black my-10">
-        User management page
+        {t("admin.user-management.title")}
       </div>
       <div className="m-auto">
         <ModalCreate

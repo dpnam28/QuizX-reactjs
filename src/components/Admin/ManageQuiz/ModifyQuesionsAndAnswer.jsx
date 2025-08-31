@@ -16,13 +16,14 @@ import {
 import Lightbox from "react-awesome-lightbox";
 import { toast } from "react-toastify";
 import { getQuizWithQuestionAnswer } from "../../../services/apiServices";
-
+import { useTranslation } from "react-i18next";
 const ModifyQuestionsAndAnswer = () => {
   const [questions, setQuestions] = useState([]);
   const [openLightBox, setOpenLightBox] = useState(false);
   const [lightBoxImg, setLightBoxImg] = useState("");
   const [listQuiz, setListQuiz] = useState([]);
   const [quizSelected, setQuizSelected] = useState("");
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchAllQuiz();
@@ -248,14 +249,14 @@ const ModifyQuestionsAndAnswer = () => {
     <>
       <div className="container">
         {/* Quiz section */}
-        <Form.Label>Choose quiz</Form.Label>
+        <Form.Label>{t("admin.quiz-management.choose-quiz")}</Form.Label>
         <Form.Select
           aria-label="Floating label select example"
           value={quizSelected?.value ?? ""}
           onChange={(e) => handleSelectQuiz(+e.target.value)}
         >
           <option value={""} disabled hidden>
-            Choose quiz...
+            {t("admin.quiz-management.choose-quiz")}...
           </option>
           {!_.isEmpty(listQuiz) &&
             listQuiz.map((item) => (
@@ -270,7 +271,9 @@ const ModifyQuestionsAndAnswer = () => {
           questions.map((ques, index) => (
             <div className="" key={ques.id}>
               <Row className="my-3 items-center">
-                <Form.Label>Question {index + 1}</Form.Label>
+                <Form.Label>
+                  {t("admin.quiz-management.question")} {index + 1}
+                </Form.Label>
                 <Form.Group as={Col} md="6">
                   <Form.Control
                     type="text"
@@ -303,8 +306,10 @@ const ModifyQuestionsAndAnswer = () => {
                     className="flex cursor-pointer mr-10"
                     htmlFor={ques.id}
                   >
-                    <span className="max-w-30">
-                      {ques.imageName ? ques.imageName : "0 file is uploaded"}
+                    <span className="max-w-40">
+                      {ques.imageName
+                        ? ques.imageName
+                        : t("admin.quiz-management.no-file-uploaded")}
                     </span>
                   </Form.Label>
                   <Form.Control
@@ -351,7 +356,9 @@ const ModifyQuestionsAndAnswer = () => {
                           )
                         }
                       />
-                      <FloatingLabel label={"Answer " + (index + 1)}>
+                      <FloatingLabel
+                        label={t("admin.quiz-management.answer") + (index + 1)}
+                      >
                         <Form.Control
                           type="text"
                           value={ans.description}
@@ -390,7 +397,7 @@ const ModifyQuestionsAndAnswer = () => {
             onClick={handleUpdateQuestionAndAnswer}
             className="w-40 pb-2"
           >
-            Save
+            {t("admin.quiz-management.save")}
           </Button>
         )}
       </div>

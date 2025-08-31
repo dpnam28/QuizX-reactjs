@@ -6,12 +6,14 @@ import _ from "lodash";
 import { postAssignQuizToUser } from "../../../services/apiServices";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
+import { useTranslation } from "react-i18next";
 
 const AssignQuizForUser = ({ listQuiz, setListQuiz }) => {
   const [listAllUsers, setListAllUsers] = useState([]);
   const [quizSelected, setQuizSelected] = useState("");
   const [userSelected, setUserSelected] = useState("");
   const [listQuizForAssign, setListQuizForAssign] = useState([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchListUser();
@@ -58,13 +60,13 @@ const AssignQuizForUser = ({ listQuiz, setListQuiz }) => {
       <Row>
         {/* Choose quiz section */}
         <Form.Group as={Col} md="6">
-          <Form.Label>Choose quiz</Form.Label>
+          <Form.Label>{t("admin.quiz-management.choose-quiz")}</Form.Label>
           <Form.Select
             value={quizSelected}
             onChange={(e) => setQuizSelected(+e.target.value)}
           >
             <option value={""} disabled hidden>
-              Choose quiz...
+              {t("admin.quiz-management.choose-quiz")}...
             </option>
             {!_.isEmpty(listQuizForAssign) &&
               listQuizForAssign.map((item) => (
@@ -77,13 +79,13 @@ const AssignQuizForUser = ({ listQuiz, setListQuiz }) => {
 
         {/* Choose user section */}
         <Form.Group as={Col} md="6">
-          <Form.Label>Choose user</Form.Label>
+          <Form.Label>{t("admin.quiz-management.select-user")}</Form.Label>
           <Form.Select
             value={userSelected}
             onChange={(e) => setUserSelected(+e.target.value)}
           >
             <option value={""} disabled hidden>
-              Choose user...
+              {t("admin.quiz-management.select-user")}...
             </option>
             {!_.isEmpty(listAllUsers) &&
               listAllUsers.map((item) => (
@@ -99,7 +101,7 @@ const AssignQuizForUser = ({ listQuiz, setListQuiz }) => {
         className="w-20 mt-3 mx-auto"
         onClick={() => handleAssign()}
       >
-        Assign
+        {t("admin.quiz-management.assign")}
       </Button>
     </>
   );

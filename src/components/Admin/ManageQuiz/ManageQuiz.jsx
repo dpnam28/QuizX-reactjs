@@ -11,14 +11,15 @@ import { toast } from "react-toastify";
 import TableQuiz from "./TableQuiz";
 import AssignQuizForUser from "./AssignQuizForUser";
 import ModifyQuestionsAndAnswer from "./ModifyQuesionsAndAnswer";
-
-const levelOptions = [
-  { value: "EASY", label: "EASY" },
-  { value: "MEDIUM", label: "MEDIUM" },
-  { value: "HARD", label: "HARD" },
-];
+import { useTranslation } from "react-i18next";
 
 const ManageQuiz = () => {
+  const { t } = useTranslation();
+  const levelOptions = [
+    { value: "EASY", label: t("admin.quiz-management.easy") },
+    { value: "MEDIUM", label: t("admin.quiz-management.medium") },
+    { value: "HARD", label: t("admin.quiz-management.hard") },
+  ];
   const [quizName, setQuizName] = useState("");
   const [desctiption, setDesctiption] = useState("");
   const [level, setLevel] = useState("EASY");
@@ -65,7 +66,7 @@ const ManageQuiz = () => {
   return (
     <>
       <div className="text-center sm:text-5xl text-2xl mt-5 text-black font-black">
-        Manage Quiz
+        {t("admin.quiz-management.title")}
       </div>
       <div className="container mx-auto mt-10">
         <Accordion>
@@ -74,17 +75,21 @@ const ManageQuiz = () => {
             eventKey="0"
             className="mx-auto w-[80%] max-w-270 relative"
           >
-            <Accordion.Header>Add new quiz</Accordion.Header>
+            <Accordion.Header>
+              <span className="capitalize">
+                {t("admin.quiz-management.add-new-quiz")}
+              </span>
+            </Accordion.Header>
             <Accordion.Body>
               <div>
                 {/* Create form */}
                 <fieldset className="border rounded-lg p-5">
                   <legend className="float-none w-auto px-3 text-xl">
-                    Add new quiz
+                    {t("admin.quiz-management.add-new-quiz")}
                   </legend>
                   <FloatingLabel
                     controlId="floatingInput"
-                    label="Quiz name"
+                    label={t("admin.quiz-management.quiz-name")}
                     className="mb-3"
                   >
                     <Form.Control
@@ -97,7 +102,7 @@ const ManageQuiz = () => {
 
                   <FloatingLabel
                     controlId="floatingTextarea2"
-                    label="Description"
+                    label={t("admin.quiz-management.description")}
                   >
                     <Form.Control
                       as="textarea"
@@ -110,7 +115,7 @@ const ManageQuiz = () => {
                   {/* choose level */}
                   <FloatingLabel
                     controlId="floatingSelect"
-                    label="Choose difficulty"
+                    label={t("admin.quiz-management.choose-difficulty")}
                   >
                     <Form.Select
                       aria-label="Default select example"
@@ -133,7 +138,8 @@ const ManageQuiz = () => {
                       htmlFor="file"
                       className="cursor-pointer border border-black rounded-lg pb-1 px-2 border-dashed"
                     >
-                      <span className="text-xl font-black">+</span> Choose Image
+                      <span className="text-xl font-black">+</span>{" "}
+                      {t("admin.quiz-management.choose-image")}
                     </Form.Label>
                     <Form.Control
                       type="file"
@@ -157,7 +163,7 @@ const ManageQuiz = () => {
                     className="w-40 pb-2 mt-3"
                     onClick={() => handleCreateQuiz()}
                   >
-                    Create
+                    {t("admin.quiz-management.create")}
                   </Button>
                 </fieldset>
               </div>
@@ -177,7 +183,11 @@ const ManageQuiz = () => {
             eventKey="2"
             className="mx-auto w-[80%] max-w-270 relative"
           >
-            <Accordion.Header>Modify Question and Answer</Accordion.Header>
+            <Accordion.Header>
+              <span className="capitalize">
+                {t("admin.quiz-management.modify-qa")}
+              </span>
+            </Accordion.Header>
             <Accordion.Body>
               <ModifyQuestionsAndAnswer />
             </Accordion.Body>
@@ -188,7 +198,11 @@ const ManageQuiz = () => {
             eventKey="1"
             className="mx-auto w-[80%] max-w-270 relative"
           >
-            <Accordion.Header>Assign quiz for user</Accordion.Header>
+            <Accordion.Header>
+              <span className="capitalize">
+                {t("admin.quiz-management.assign-quiz-for-user")}
+              </span>
+            </Accordion.Header>
             <Accordion.Body>
               <AssignQuizForUser
                 listQuiz={listQuiz}

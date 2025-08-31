@@ -283,7 +283,7 @@ const AddQuestionForQuiz = () => {
                     className="flex cursor-pointer mr-10"
                     htmlFor={ques.id}
                   >
-                    <span className="max-w-30">
+                    <span className="max-w-40">
                       {ques.imageName ? ques.imageName : "0 file is uploaded"}
                     </span>
                   </Form.Label>

@@ -6,10 +6,10 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { toast } from "react-toastify";
 import { createNewParticipant } from "../../../../services/apiServices";
-
+import { useTranslation } from "react-i18next";
 function ModalCreate(props) {
   const { show, setShow, fetchListUser, currentPage } = props;
-
+  const { t } = useTranslation();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -90,19 +90,19 @@ function ModalCreate(props) {
 
   return (
     <>
-      <Button variant="dark" onClick={handleShow} className="w-40 pb-2">
-        Add a new user
+      <Button variant="dark" onClick={handleShow} className="w-50 pb-2">
+        {t("admin.user-management.add-new-user")}
       </Button>
 
       <Modal show={show} onHide={handleClose} size="lg" backdrop="static">
         <Modal.Header closeButton>
-          <Modal.Title>Add a new user</Modal.Title>
+          <Modal.Title> {t("admin.user-management.add-new-user")}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form noValidate>
             <Row className="mb-3">
               <Form.Group as={Col} md="6" controlId="validationCustom01">
-                <Form.Label>Email</Form.Label>
+                <Form.Label> {t("admin.user-management.email")}</Form.Label>
                 <Form.Control
                   required
                   type="text"
@@ -112,11 +112,11 @@ function ModalCreate(props) {
                 />
               </Form.Group>
               <Form.Group as={Col} md="6" controlId="validationCustom02">
-                <Form.Label>Password</Form.Label>
+                <Form.Label> {t("admin.user-management.password")}</Form.Label>
                 <Form.Control
                   required
                   type="password"
-                  placeholder="Password"
+                  placeholder={t("admin.user-management.password")}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
@@ -124,24 +124,28 @@ function ModalCreate(props) {
             </Row>
             <Row className="mb-3">
               <Form.Group as={Col} md="6" controlId="validationCustom03">
-                <Form.Label>Username</Form.Label>
+                <Form.Label>{t("admin.user-management.username")}</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Username"
+                  placeholder={t("admin.user-management.username")}
                   required
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                 />
               </Form.Group>
               <Form.Group as={Col} md="6">
-                <Form.Label>Role</Form.Label>
+                <Form.Label>{t("admin.user-management.role")}</Form.Label>
                 <Form.Select
                   required
                   onChange={(e) => setRole(e.target.value)}
                   value={role}
                 >
-                  <option value="USER">User</option>
-                  <option value="ADMIN">Admin</option>
+                  <option value="USER">
+                    {t("admin.user-management.user")}
+                  </option>
+                  <option value="ADMIN">
+                    {t("admin.user-management.admin")}
+                  </option>
                 </Form.Select>
               </Form.Group>
               <Form.Group className="position-relative mt-3">
@@ -149,7 +153,8 @@ function ModalCreate(props) {
                   htmlFor="file"
                   className="cursor-pointer border border-black rounded-lg pb-1 px-2 border-dashed"
                 >
-                  <span className="text-xl font-black">+</span> Choose Image
+                  <span className="text-xl font-black">+</span>{" "}
+                  {t("admin.user-management.choose-image")}
                 </Form.Label>
                 <Form.Control
                   type="file"
@@ -171,10 +176,10 @@ function ModalCreate(props) {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            {t("admin.user-management.close")}
           </Button>
           <Button variant="primary" onClick={handleSubmit}>
-            Save
+            {t("admin.user-management.save")}
           </Button>
         </Modal.Footer>
       </Modal>

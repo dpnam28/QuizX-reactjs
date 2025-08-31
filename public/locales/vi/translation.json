@@ -1,9 +1,103 @@
 {
+  "header": {
+    "log-in": "Đăng nhập",
+    "sign-up": "Đăng ký",
+    "setting": "Cài đặt",
+    "log-out": "Đăng xuất",
+    "information": "Thông tin"
+  },
   "homepage": {
     "title1": "Bản ghi, khảo sát, và các câu hỏi",
     "title2": "Nhận thêm 3.5x thông tin",
     "text": "Khi biểu mẫu của bạn phá vỡ chuẩn mực, sẽ có nhiều người điền vào hơn. Nghĩ đến các thiết kế có thương hiệu, nội dung video và các câu hỏi tiếp theo có liên quan.",
     "sign-up": "Đăng ký",
     "do-quiz-now": "Làm quiz"
+  },
+  "login": {
+    "back-to-homepage": "Về trang chủ",
+    "dont-have-an-account": "Chưa có tài khoản?",
+    "sign-up": "Đăng ký",
+    "need-help": "Cần trợ giúp?",
+    "hello": "Xin chào, bạn là ai",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "forgot-password": "Quên mật khẩu?",
+    "log-in": "Đăng nhập"
+  },
+  "sign-up": {
+    "back-to-homepage": "Về trang chủ",
+    "log-in": "Đăng nhập",
+    "need-help": "Cần trợ giúp?",
+    "create-your-account": "Tạo tài khoản của bạn",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "username": "Tên người dùng",
+    "sign-up": "Đăng ký"
+  },
+  "sidebar": {
+    "home": "Trang chủ",
+    "admin": "Admin",
+    "user": "Người dùng",
+    "dashboard": "Bảng điều khiển",
+    "user-management": "Quản lý người dùng",
+    "quiz-management": "Quản lý quiz",
+    "create-questions": "Tạo câu hỏi"
+  },
+  "admin": {
+    "dashboard": {
+      "title": "Trang điều khiển",
+      "total-users": "Tổng người dùng",
+      "total-quizzes": "Tổng quiz",
+      "total-questions": "Tổng câu hỏi",
+      "total-answers": "Tổng câu trả lời",
+      "quizzes": "Quizzes",
+      "questions": "Câu hỏi",
+      "answers": "Câu trả lời"
+    },
+    "user-management": {
+      "title": "Trang quản lý người dùng",
+      "add-new-user": "Thêm người dùng mới",
+      "list-all-users": "Danh sách tất cả người dùng",
+      "email": "Email",
+      "password": "Mật khẩu",
+      "username": "Tên người dùng",
+      "role": "Vai trò",
+      "user": "Người dùng",
+      "choose-image": "Chọn ảnh",
+      "close": "Đóng",
+      "save": "Lưu",
+      "admin": "Admin",
+      "action": "Hành động",
+      "update": "Cập nhật",
+      "delete": "Xóa",
+      "confirm-delete": "Bạn có chắc chắn muốn xóa người dùng: ",
+      "previous": "< Trước",
+      "next": "Tiếp >"
+    },
+    "quiz-management": {
+      "title": "Trang quản lý quiz",
+      "add-new-quiz": "Thêm quiz mới",
+      "quiz-name": "Tên quiz",
+      "description": "Mô tả",
+      "choose-difficulty": "Chọn độ khó",
+      "easy": "Dễ",
+      "medium": "Trung bình",
+      "hard": "Khó",
+      "choose-image": "Chọn ảnh",
+      "create": "Tạo",
+      "modify-qa": "Chỉnh sửa câu hỏi và câu trả lời",
+      "choose-quiz": "Chọn quiz",
+      "assign-quiz-for-user": "Gán quiz cho người dùng",
+      "select-user": "Chọn người dùng",
+      "assign": "Gán",
+      "update": "Cập nhật",
+      "delete": "Xóa",
+      "save": "Lưu",
+      "question": "Câu hỏi",
+      "answer": "Câu trả lời",
+      "no-file-uploaded": "Chưa có file nào được tải lên",
+      "actions": "Hành động",
+      "difficulty": "Độ khó"
+    }
   }
 }

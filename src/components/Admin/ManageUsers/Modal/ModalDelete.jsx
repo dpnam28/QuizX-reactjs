@@ -4,6 +4,7 @@ import Modal from "react-bootstrap/Modal";
 import _ from "lodash";
 import { deleteUserById } from "../../../../services/apiServices";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 function ModalDelete(props) {
   const {
     show,
@@ -14,6 +15,7 @@ function ModalDelete(props) {
     setCurrentPage,
     currentPage,
   } = props;
+  const { t } = useTranslation();
   const [username, setUserName] = useState("");
   const [id, setId] = useState("");
 
@@ -57,17 +59,17 @@ function ModalDelete(props) {
     <>
       <Modal show={show} onHide={handleClose} backdrop="static">
         <Modal.Header closeButton>
-          <Modal.Title>Delete user</Modal.Title>
+          <Modal.Title>{t("admin.user-management.delete")}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Are you sure you want to delete this user: <b>{username}</b>
+          {t("admin.user-management.confirm-delete")} <b>{username}</b>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            {t("admin.user-management.close")}
           </Button>
           <Button variant="danger" onClick={() => handleDeleteUser(id)}>
-            Delete
+            {t("admin.user-management.delete")}
           </Button>
         </Modal.Footer>
       </Modal>

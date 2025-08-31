@@ -7,11 +7,14 @@ import { commitLogin } from "../../redux/actions/userAction";
 import { useDispatch, useSelector } from "react-redux";
 import { FaSpinner } from "react-icons/fa";
 import ChangeLanguage from "../ChangeLanguage";
+import { useTranslation, Trans } from "react-i18next";
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [isLoadingLogIn, setIsLoadingLogIn] = useState(false);
+  const { t, i18n } = useTranslation();
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -70,15 +73,19 @@ const Login = () => {
             onClick={() => navigate("/")}
           >
             <span className="text-xl font-black">&lt;&lt;</span>{" "}
-            <span className="sm:inline hidden">Back to homepage</span>
+            <span className="sm:inline hidden">
+              {t("login.back-to-homepage")}
+            </span>
           </div>
           <div className="float-right mr-3 text-md flex items-center">
-            <span className="sm:inline hidden">Don't have an account yet?</span>
+            <span className="sm:inline hidden">
+              {t("login.dont-have-an-account")}
+            </span>
             <span
               className="border border-gray-900 p-1 px-2 mx-2 cursor-pointer"
               onClick={() => navigate("/signup")}
             >
-              Sign up
+              {t("login.sign-up")}
             </span>
             <ChangeLanguage />
             <a
@@ -86,7 +93,7 @@ const Login = () => {
               className="text-black ml-2"
               onClick={() => navigate("/help")}
             >
-              Need help?
+              {t("login.need-help")}
             </a>
           </div>
         </div>
@@ -100,14 +107,14 @@ const Login = () => {
             >
               QuizX
             </Link>
-            <p className="text-xl">Hello, who's this?</p>
+            <p className="text-xl">{t("login.hello")}</p>
           </div>
 
           <div className="w-[60%] max-w-[360px] mt-4">
             <form action="" className="flex flex-col gap-3">
               <div className="flex flex-col">
                 <label htmlFor="email" className="text-lg my-2">
-                  Email
+                  {t("login.email")}
                 </label>
                 <input
                   type="text"
@@ -123,13 +130,13 @@ const Login = () => {
               </div>
               <div className="flex flex-col relative">
                 <label htmlFor="password" className="text-lg my-2">
-                  Password
+                  {t("login.password")}
                 </label>
                 <input
                   type={isShowPassword ? "text" : "password"}
                   id="password"
                   className="w-[100%] border rounded-sm p-3 text-md"
-                  placeholder="password"
+                  placeholder={t("login.password")}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   onKeyDown={(e) => {
@@ -154,7 +161,7 @@ const Login = () => {
               </div>
               <div>
                 <a href="" className="text-gray-500">
-                  Forgot password?
+                  {t("login.forgot-password")}
                 </a>
               </div>
 
@@ -168,7 +175,7 @@ const Login = () => {
                   {isLoadingLogIn && (
                     <FaSpinner className="absolute left-1/3 top-1/3 animate-spin" />
                   )}
-                  Log in
+                  {t("login.log-in")}
                 </button>
               </div>
             </form>

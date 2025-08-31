@@ -10,6 +10,7 @@ const INITAL_STATE = {
     email: "",
   },
   isAuthenticated: false,
+  language: "en",
 };
 
 const userReducer = (state = INITAL_STATE, action) => {
@@ -26,6 +27,7 @@ const userReducer = (state = INITAL_STATE, action) => {
           email: action?.payload?.DT?.email ?? "",
         },
         isAuthenticated: true,
+        language: "en",
       };
     case actionTypes.LOG_OUT:
       return {
@@ -38,6 +40,12 @@ const userReducer = (state = INITAL_STATE, action) => {
           email: "",
         },
         isAuthenticated: false,
+        language: "en",
+      };
+    case actionTypes.CHANGE_LANGUAGE:
+      return {
+        ...state,
+        language: action.payload,
       };
     default:
       return state;

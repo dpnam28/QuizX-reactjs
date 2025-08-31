@@ -3,11 +3,14 @@ import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { LuEyeClosed, LuEye } from "react-icons/lu";
 import { postSignUp } from "../../services/apiServices";
+import ChangeLanguage from "../ChangeLanguage";
+import { useTranslation, Trans } from "react-i18next";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+  const { t } = useTranslation();
 
   const [isShowPassword, setIsShowPassword] = useState(false);
 
@@ -63,18 +66,25 @@ const SignUp = () => {
           className="float-left ml-2 text-md absolute top-1 cursor-pointer"
           onClick={() => navigate("/")}
         >
-          <span className="text-xl font-black">&lt;&lt;</span>{" "}
-          <span className="sm:inline hidden">Back to homepage</span>
+          <span className="text-xl font-black">&lt;&lt;</span>
+          <span className="sm:inline hidden">
+            {t("sign-up.back-to-homepage")}
+          </span>
         </div>
-        <div className="float-right mr-3 text-md">
+        <div className="float-right mr-2 text-md flex items-center">
           <span
             className="border border-gray-900 p-1 px-2 mx-2 cursor-pointer"
             onClick={() => navigate("/login")}
           >
-            Log in
+            {t("sign-up.log-in")}
           </span>
-          <a href="" className="text-black" onClick={() => navigate("/help")}>
-            Need help?
+          <ChangeLanguage />
+          <a
+            href=""
+            className="text-black ml-3"
+            onClick={() => navigate("/help")}
+          >
+            {t("sign-up.need-help")}
           </a>
         </div>
       </div>
@@ -87,14 +97,14 @@ const SignUp = () => {
           >
             QuizX
           </Link>
-          <p className="text-xl">register</p>
+          <p className="text-xl">{t("sign-up.create-your-account")}</p>
         </div>
 
         <div className="w-[60%] max-w-[360px]">
           <form action="" className="flex flex-col gap-3">
             <div className="flex flex-col">
               <label htmlFor="email" className="text-lg my-2">
-                Email
+                {t("sign-up.email")}
               </label>
               <input
                 type="text"
@@ -107,13 +117,13 @@ const SignUp = () => {
             </div>
             <div className="flex flex-col relative">
               <label htmlFor="password" className="text-lg my-2">
-                Password
+                {t("sign-up.password")}
               </label>
               <input
                 type={isShowPassword ? "text" : "password"}
                 id="password"
                 className="w-[100%] border rounded-sm p-3 text-md"
-                placeholder="password"
+                placeholder={t("sign-up.password")}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -135,13 +145,13 @@ const SignUp = () => {
             </div>
             <div className="flex flex-col">
               <label htmlFor="username" className="text-lg my-2">
-                Username
+                {t("sign-up.username")}
               </label>
               <input
                 type="text"
                 id="username"
                 className="w-[100%] border rounded-sm p-3 text-md"
-                placeholder="your username"
+                placeholder={t("sign-up.username")}
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
@@ -153,7 +163,7 @@ const SignUp = () => {
                 onClick={() => handleLoginBtn()}
                 className="bg-black text-white text-center text-xl font-bold w-[100%] rounded-md py-2"
               >
-                Log in
+                {t("sign-up.sign-up")}
               </button>
             </div>
           </form>

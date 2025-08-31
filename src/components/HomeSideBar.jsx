@@ -5,13 +5,15 @@ import { Link, NavLink } from "react-router-dom";
 import { FaHome, FaUser } from "react-icons/fa";
 import { MdAdminPanelSettings } from "react-icons/md";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 export const HomeSidebar = () => {
   const [collapsed, setCollapsed] = useState(true);
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+  const { t } = useTranslation();
 
   return (
-    <div className="flex flex-col h-screen min-h-100 -z-10 absolute top-0 -left-0">
+    <div className="flex flex-col h-screen min-h-100 absolute top-0 -left-0">
       <main className="p-[10px]">
         <div>
           <button
@@ -34,7 +36,7 @@ export const HomeSidebar = () => {
             component={<NavLink to="" />}
             className="nav-link font-medium text-lg"
           >
-            Home
+            {t("sidebar.home")}
           </MenuItem>
           {isAuthenticated && (
             <MenuItem
@@ -42,7 +44,7 @@ export const HomeSidebar = () => {
               component={<NavLink to="user" />}
               className="nav-link font-medium text-lg"
             >
-              User
+              {t("sidebar.user")}
             </MenuItem>
           )}
           <SubMenu
@@ -54,25 +56,25 @@ export const HomeSidebar = () => {
               className="font-medium text-sm"
               component={<Link to="admin" />}
             >
-              DashBoard
+              {t("sidebar.dashboard")}
             </MenuItem>
             <MenuItem
               className="font-medium text-sm"
               component={<Link to="admin/manage-users" />}
             >
-              Manage Users
+              {t("sidebar.user-management")}
             </MenuItem>
             <MenuItem
               className="font-medium text-sm"
               component={<Link to="admin/manage-quiz" />}
             >
-              Manage Quiz
+              {t("sidebar.quiz-management")}
             </MenuItem>
             <MenuItem
               className="font-medium text-sm"
               component={<Link to="admin/create-question" />}
             >
-              Create Questions
+              {t("sidebar.create-questions")}
             </MenuItem>
           </SubMenu>
         </Menu>

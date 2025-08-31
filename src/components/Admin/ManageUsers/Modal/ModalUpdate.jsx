@@ -7,7 +7,7 @@ import Row from "react-bootstrap/Row";
 import { toast } from "react-toastify";
 import { putUpdateUser } from "../../../../services/apiServices";
 import _ from "lodash";
-
+import { useTranslation } from "react-i18next";
 function ModalUpdate(props) {
   const {
     show,
@@ -17,7 +17,7 @@ function ModalUpdate(props) {
     setUpdatingUser,
     currentPage,
   } = props;
-
+  const { t } = useTranslation();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("************");
   const [email, setEmail] = useState("");
@@ -86,13 +86,13 @@ function ModalUpdate(props) {
     <>
       <Modal show={show} onHide={handleClose} size="lg" backdrop="static">
         <Modal.Header closeButton>
-          <Modal.Title>Update user</Modal.Title>
+          <Modal.Title>{t("admin.user-management.update")}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form noValidate>
             <Row className="mb-3">
               <Form.Group as={Col} md="6" controlId="validationCustom01">
-                <Form.Label>Email</Form.Label>
+                <Form.Label>{t("admin.user-management.email")}</Form.Label>
                 <Form.Control
                   required
                   type="text"
@@ -102,11 +102,11 @@ function ModalUpdate(props) {
                 />
               </Form.Group>
               <Form.Group as={Col} md="6" controlId="validationCustom02">
-                <Form.Label>Password</Form.Label>
+                <Form.Label>{t("admin.user-management.password")}</Form.Label>
                 <Form.Control
                   required
                   type="password"
-                  placeholder="Password"
+                  placeholder={t("admin.user-management.password")}
                   value={password}
                   disabled
                 />
@@ -114,24 +114,28 @@ function ModalUpdate(props) {
             </Row>
             <Row className="mb-3">
               <Form.Group as={Col} md="6" controlId="validationCustom03">
-                <Form.Label>Username</Form.Label>
+                <Form.Label>{t("admin.user-management.username")}</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Username"
+                  placeholder={t("admin.user-management.username")}
                   required
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                 />
               </Form.Group>
               <Form.Group as={Col} md="6">
-                <Form.Label>Role</Form.Label>
+                <Form.Label>{t("admin.user-management.role")}</Form.Label>
                 <Form.Select
                   required
                   onChange={(e) => setRole(e.target.value)}
                   value={role}
                 >
-                  <option value="USER">User</option>
-                  <option value="ADMIN">Admin</option>
+                  <option value="USER">
+                    {t("admin.user-management.user")}
+                  </option>
+                  <option value="ADMIN">
+                    {t("admin.user-management.admin")}
+                  </option>
                 </Form.Select>
               </Form.Group>
               <Form.Group className="position-relative mt-3">
@@ -139,7 +143,8 @@ function ModalUpdate(props) {
                   htmlFor="file"
                   className="cursor-pointer border border-black rounded-lg pb-1 px-2 border-dashed"
                 >
-                  <span className="text-xl font-black">+</span> Choose Image
+                  <span className="text-xl font-black">+</span>{" "}
+                  {t("admin.user-management.choose-image")}
                 </Form.Label>
                 <Form.Control
                   type="file"
@@ -161,10 +166,10 @@ function ModalUpdate(props) {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            {t("admin.user-management.close")}
           </Button>
           <Button variant="primary" onClick={handleSubmit}>
-            Save
+            {t("admin.user-management.save")}
           </Button>
         </Modal.Footer>
       </Modal>

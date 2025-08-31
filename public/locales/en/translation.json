@@ -1,9 +1,103 @@
 {
+  "header": {
+    "log-in": "Log in",
+    "sign-up": "Sign up",
+    "setting": "Setting",
+    "log-out": "Log out",
+    "information": "Information"
+  },
   "homepage": {
     "title1": "Forms, surveys, and quizzes",
     "title2": "Get up to 3.5x more data about them",
     "text": "When your forms break the norm,sm more people fill them out. Think branded designs, video content, and relevant follow-up questions.",
     "sign-up": "Sign up",
     "do-quiz-now": "Do quiz now"
+  },
+  "login": {
+    "back-to-homepage": "Back to homepage",
+    "dont-have-an-account": "Don't have an account?",
+    "sign-up": "Sign up",
+    "need-help": "Need help?",
+    "hello": "Hello, who's this",
+    "email": "Email",
+    "password": "Password",
+    "forgot-password": "Forgot password?",
+    "log-in": "Log in"
+  },
+  "sign-up": {
+    "back-to-homepage": "Back to homepage",
+    "log-in": "Log in",
+    "need-help": "Need help?",
+    "create-your-account": "Create your account",
+    "email": "Email",
+    "password": "Password",
+    "username": "Username",
+    "sign-up": "Sign up"
+  },
+  "sidebar": {
+    "home": "Home",
+    "admin": "Admin",
+    "user": "User",
+    "dashboard": "Dashboard",
+    "user-management": "User Management",
+    "quiz-management": "Quiz Management",
+    "create-questions": "Create Questions"
+  },
+  "admin": {
+    "dashboard": {
+      "title": "Dashboard page",
+      "total-users": "Total Users",
+      "total-quizzes": "Total Quizzes",
+      "total-questions": "Total Questions",
+      "total-answers": "Total Answers",
+      "quizzes": "Quizzes",
+      "questions": "Questions",
+      "answers": "Answers"
+    },
+    "user-management": {
+      "title": "User management page",
+      "add-new-user": "Add new user",
+      "list-all-users": "List all users",
+      "email": "Email",
+      "password": "Password",
+      "username": "Username",
+      "role": "Role",
+      "user": "User",
+      "admin": "Admin",
+      "action": "Action",
+      "choose-image": "Choose image",
+      "close": "Close",
+      "save": "Save",
+      "update": "Update",
+      "delete": "Delete",
+      "confirm-delete": "Are you sure you want to delete this user: ",
+      "previous": "< Prev",
+      "next": "Next >"
+    },
+    "quiz-management": {
+      "title": "Quiz management page",
+      "add-new-quiz": "Add New Quiz",
+      "quiz-name": "Quiz name",
+      "description": "Description",
+      "choose-difficulty": "Choose difficulty",
+      "easy": "Easy",
+      "medium": "Medium",
+      "hard": "Hard",
+      "choose-image": "Choose image",
+      "create": "Create",
+      "modify-qa": "Modify Questions And Answers",
+      "choose-quiz": "Choose quiz",
+      "assign-quiz-for-user": "Assign quiz for user",
+      "select-user": "Select user",
+      "assign": "Assign",
+      "update": "Update",
+      "delete": "Delete",
+      "save": "Save",
+      "question": "Question",
+      "answer": "Answer",
+      "actions": "Actions",
+      "no-file-uploaded": "No file is uploaded",
+      "difficulty": "Difficulty"
+    }
   }
 }

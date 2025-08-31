@@ -10,9 +10,11 @@ import { toast } from "react-toastify";
 import { postLogOut } from "../services/apiServices";
 import _ from "lodash";
 import ChangeLanguage from "./ChangeLanguage";
+import { useTranslation, Trans } from "react-i18next";
 function Header() {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const account = useSelector((state) => state.user.account);
+  const { t, i18n } = useTranslation();
 
   const [openHomeSideBar, setOpenHomeSideBar] = useState(true);
   const [openDropDown, setOpenDropDown] = useState(false);
@@ -61,7 +63,7 @@ function Header() {
                 className="hover:text-blue-400 font-bold px-4 text-base"
                 onClick={() => handleLogin()}
               >
-                Log in
+                {t("header.log-in")}
               </button>
               <button
                 onClick={() => {
@@ -69,7 +71,7 @@ function Header() {
                 }}
                 className="bg-gray-900 text-white font-bold rounded-xl text-base px-3 py-1.5 hover:bg-gray-600 pt-1"
               >
-                Sign up
+                {t("header.sign-up")}
               </button>
             </Nav>
           ) : (
@@ -83,9 +85,9 @@ function Header() {
                       : ""
                   }
                 >
-                  Setting
+                  {t("header.setting")}
                   <IoMdArrowDropdown
-                    className={`absolute -right-5 top-2 ${
+                    className={`absolute -right-5 top-1/4 ${
                       openDropDown ? "rotate-180" : ""
                     } transition-all duration-500 sm:inline hidden`}
                   />
@@ -100,16 +102,16 @@ function Header() {
                     <Link
                       onClick={() => handleLogOut()}
                       to="login"
-                      className="px-8 py-2 text-black no-underline hover:bg-gray-200"
+                      className="px-8 py-2 text-black no-underline hover:bg-gray-200 w-35"
                     >
-                      Log out
+                      {t("header.log-out")}
                     </Link>
                     <div className="border border-gray-200"></div>
                     <a
                       href=""
                       className="px-8 py-2 text-black no-underline hover:bg-gray-200"
                     >
-                      Information
+                      {t("header.information")}
                     </a>
                   </div>
                 )}

@@ -2,7 +2,7 @@ import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import ReactPaginate from "react-paginate";
 import _ from "lodash";
-
+import { useTranslation } from "react-i18next";
 function AllUserTable(props) {
   let {
     listAllUsersWithPagination,
@@ -13,7 +13,7 @@ function AllUserTable(props) {
     currentPage,
     setCurrentPage,
   } = props;
-
+  const { t } = useTranslation();
   // useEffect(() => {}, [listAllUsers]);
   const handlePageClick = (event) => {
     fetchListUserWithPagination(event.selected + 1);
@@ -29,16 +29,15 @@ function AllUserTable(props) {
         className="m-auto w-[80%] align-middle text-center"
       >
         <caption className="caption-top text-center sm:text-xl text-sm">
-          List all participants
+          {t("admin.user-management.list-all-users")}
         </caption>
         <thead>
           <tr>
             <th>ID</th>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Image</th>
-            <th>Action</th>
+            <th> {t("admin.user-management.username")}</th>
+            <th>{t("admin.user-management.email")}</th>
+            <th>{t("admin.user-management.role")}</th>
+            <th>{t("admin.user-management.action")}</th>
           </tr>
         </thead>
         <tbody>
@@ -54,7 +53,6 @@ function AllUserTable(props) {
                   <td>{user?.username ?? "no username"}</td>
                   <td>{user?.email ?? "no email"}</td>
                   <td>{user?.role ?? "no role"}</td>
-                  <td>{user?.image ? "has image" : "no image"}</td>
                   <td>
                     <Button
                       variant="success"
@@ -65,7 +63,7 @@ function AllUserTable(props) {
                         setShowUpdate(user);
                       }}
                     >
-                      Update
+                      {t("admin.user-management.update")}
                     </Button>
                     <Button
                       variant="danger"
@@ -76,7 +74,7 @@ function AllUserTable(props) {
                         setShowDelete(user);
                       }}
                     >
-                      Delete
+                      {t("admin.user-management.delete")}
                     </Button>
                   </td>
                 </tr>
@@ -94,12 +92,12 @@ function AllUserTable(props) {
 
       <div className="mt-5">
         <ReactPaginate
-          nextLabel="Next >"
+          nextLabel={t("admin.user-management.next")}
           onPageChange={handlePageClick}
           pageRangeDisplayed={3}
           marginPagesDisplayed={2}
           pageCount={listAllUsersWithPagination?.totalPages ?? 0}
-          previousLabel="< Prev"
+          previousLabel={t("admin.user-management.previous")}
           pageClassName="page-item"
           pageLinkClassName="page-link"
           previousClassName="page-item"

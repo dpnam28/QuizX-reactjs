@@ -11,3 +11,9 @@ export const commitLogOut = () => {
     type: actionTypes.LOG_OUT,
   };
 };
+export const commitChangeLanguage = (language) => {
+  return {
+    type: actionTypes.CHANGE_LANGUAGE,
+    payload: language,
+  };
+};
