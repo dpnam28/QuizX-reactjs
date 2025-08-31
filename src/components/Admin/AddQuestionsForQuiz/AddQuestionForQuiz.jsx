@@ -14,6 +14,7 @@ import {
   postCreateQuestionForQuiz,
   postAnswerForQuestion,
 } from "../../../services/apiServices";
+import { useTranslation } from "react-i18next";
 import Lightbox from "react-awesome-lightbox";
 import { toast } from "react-toastify";
 
@@ -34,6 +35,7 @@ const AddQuestionForQuiz = () => {
     },
   ];
 
+  const { t } = useTranslation();
   const [questions, setQuestions] = useState(initQuestion);
   const [openLightBox, setOpenLightBox] = useState(false);
   const [lightBoxImg, setLightBoxImg] = useState("");
@@ -223,19 +225,19 @@ const AddQuestionForQuiz = () => {
   return (
     <>
       <div className="text-center sm:text-4xl text-2xl text-black font-black my-10">
-        Questions For Quiz
+        {t("admin.create-questions.title")}
       </div>
 
       <div className="container mx-auto w-[80%] max-w-200 mb-15">
         {/* Quiz section */}
-        <Form.Label>Choose quiz</Form.Label>
+        <Form.Label>{t("admin.create-questions.select-quiz")}</Form.Label>
         <Form.Select
           aria-label="Floating label select example"
           value={quizSelected?.value ?? ""}
           onChange={(e) => handleSelectQuiz(+e.target.value)}
         >
           <option value={""} disabled hidden>
-            Choose quiz...
+            {t("admin.create-questions.select-quiz")}...
           </option>
           {!_.isEmpty(listQuiz) &&
             listQuiz.map((item) => (
@@ -250,7 +252,9 @@ const AddQuestionForQuiz = () => {
           questions.map((ques, index) => (
             <div className="" key={ques.id}>
               <Row className="my-3 items-center">
-                <Form.Label>Question {index + 1}</Form.Label>
+                <Form.Label>
+                  {t("admin.create-questions.question")} {index + 1}
+                </Form.Label>
                 <Form.Group as={Col} md="6">
                   <Form.Control
                     type="text"
@@ -284,7 +288,9 @@ const AddQuestionForQuiz = () => {
                     htmlFor={ques.id}
                   >
                     <span className="max-w-40">
-                      {ques.imageName ? ques.imageName : "0 file is uploaded"}
+                      {ques.imageName
+                        ? ques.imageName
+                        : t("admin.create-questions.no-file-uploaded")}
                     </span>
                   </Form.Label>
                   <Form.Control
@@ -331,7 +337,11 @@ const AddQuestionForQuiz = () => {
                           )
                         }
                       />
-                      <FloatingLabel label={"Answer " + (index + 1)}>
+                      <FloatingLabel
+                        label={
+                          t("admin.create-questions.answer") + " " + (index + 1)
+                        }
+                      >
                         <Form.Control
                           type="text"
                           value={ans.description}
@@ -370,7 +380,7 @@ const AddQuestionForQuiz = () => {
           onClick={handleSaveQuestion}
           className="w-40 pb-2"
         >
-          Save
+          {t("admin.create-questions.save")}
         </Button>
       </div>
       {openLightBox && (

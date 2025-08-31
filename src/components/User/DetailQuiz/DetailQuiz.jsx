@@ -6,15 +6,17 @@ import { useNavigate } from "react-router-dom";
 import { postSubmitAnswer } from "../../../services/apiServices";
 import ModalResult from "../Modal/ModalResult";
 import Timmer from "./Timmer";
+import { useTranslation } from "react-i18next";
 const DetailQuiz = () => {
   const param = useParams();
   const navigate = useNavigate();
   const quizId = param.id;
-
+  const { t } = useTranslation();
   const [listQuestions, setListQuestions] = useState([]);
   const [indexQuestion, setIndexQuestion] = useState(0);
   const [showModalResult, setShowModalResult] = useState(false);
   const [dataForModalResult, setDataForModalResult] = useState([]);
+  const [time, setTime] = useState(300);
   useEffect(() => {
     fetchQuestion();
   }, [quizId]);
@@ -86,6 +88,7 @@ const DetailQuiz = () => {
       if (res?.EC === 0) {
         setShowModalResult(true);
         setDataForModalResult(res.DT);
+        setTime(0);
       }
     } else {
       return;
@@ -118,7 +121,7 @@ const DetailQuiz = () => {
           onClick={() => navigate("/")}
         >
           <span className="text-xl font-black">&lt;&lt;</span>
-          <span className="sm:inline hidden">Back to homepage</span>
+          <span className="sm:inline hidden">{t("user.back")}</span>
         </div>
       </div>
 
@@ -126,7 +129,9 @@ const DetailQuiz = () => {
         {/* left content */}
         {listQuestions.length > 0 && listQuestions[indexQuestion] && (
           <div className="w-[70%] flex flex-col">
-            <h1 className="">Question {indexQuestion + 1}</h1>
+            <h1 className="">
+              {t("user.question")} {indexQuestion + 1}
+            </h1>
 
             {/* question section */}
             <div className="flex flex-col mt-5">
@@ -175,7 +180,7 @@ const DetailQuiz = () => {
                   onClick={() => prevBtn()}
                   disabled={indexQuestion <= 0 ? true : false}
                 >
-                  Prev
+                  {t("user.prev")}
                 </button>
                 <button
                   className="bg-blue-500 px-5 py-2 disabled:bg-blue-200 text-white text-md font-semibold rounded-md"
@@ -184,16 +189,16 @@ const DetailQuiz = () => {
                     indexQuestion >= listQuestions.length - 1 ? true : false
                   }
                 >
-                  Next
+                  {t("user.next")}
                 </button>
                 <button
                   className="bg-amber-500 px-5 py-2 disabled:bg-amber-200 text-white text-md font-semibold rounded-md"
                   onClick={() => finishBtn()}
-                  // disabled={
-                  //   indexQuestion >= listQuestions.length - 1 ? false : true
-                  // }
+                  disabled={
+                    indexQuestion >= listQuestions.length - 1 ? false : true
+                  }
                 >
-                  Finish
+                  {t("user.finish")}
                 </button>
               </div>
             </div>
@@ -201,16 +206,24 @@ const DetailQuiz = () => {
         )}
 
         {/* right content */}
-        <div
-          className="border border-gray-300 rounded-xl w-[30%] h-130
+        {listQuestions.length > 0 && listQuestions[indexQuestion] && (
+          <div
+            className="border border-gray-300 rounded-xl w-[30%] h-130
         "
-        >
-          <Timmer
-            listQuestions={listQuestions}
-            finishQuiz={finishBtn}
-            setIndexQuestion={setIndexQuestion}
-          />
-        </div>
+          >
+            <Timmer
+              listQuestions={listQuestions}
+              finishQuiz={finishBtn}
+              setIndexQuestion={setIndexQuestion}
+              time={time}
+              setTime={setTime}
+            />
+          </div>
+        )}
+
+        {listQuestions.length <= 0 && (
+          <div className="mx-auto">This quiz got no questions</div>
+        )}
       </div>
 
       <ModalResult

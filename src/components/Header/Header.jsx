@@ -5,12 +5,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { HomeSidebar } from "./HomeSideBar";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
-import { commitLogOut } from "../redux/actions/userAction";
+import { commitLogOut } from "../../redux/actions/userAction";
 import { toast } from "react-toastify";
-import { postLogOut } from "../services/apiServices";
+import { postLogOut } from "../../services/apiServices";
 import _ from "lodash";
-import ChangeLanguage from "./ChangeLanguage";
+import ChangeLanguage from "../ChangeLanguage";
 import { useTranslation, Trans } from "react-i18next";
+import Information from "./Information";
 function Header() {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const account = useSelector((state) => state.user.account);
@@ -18,6 +19,7 @@ function Header() {
 
   const [openHomeSideBar, setOpenHomeSideBar] = useState(true);
   const [openDropDown, setOpenDropDown] = useState(false);
+  const [openInformation, setOpenInformation] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -99,20 +101,20 @@ function Header() {
                       !openHomeSideBar ? "right-[32.5%]" : "-left-16"
                     }`}
                   >
-                    <Link
-                      onClick={() => handleLogOut()}
-                      to="login"
-                      className="px-8 py-2 text-black no-underline hover:bg-gray-200 w-35"
-                    >
-                      {t("header.log-out")}
-                    </Link>
-                    <div className="border border-gray-200"></div>
-                    <a
-                      href=""
+                    <div
+                      onClick={() => setOpenInformation(true)}
                       className="px-8 py-2 text-black no-underline hover:bg-gray-200"
                     >
                       {t("header.information")}
-                    </a>
+                    </div>
+                    <div className="border border-gray-200"></div>
+                    <Link
+                      onClick={() => handleLogOut()}
+                      to="login"
+                      className="px-8 py-2 text-black no-underline hover:bg-gray-200 w-38"
+                    >
+                      {t("header.log-out")}
+                    </Link>
                   </div>
                 )}
               </div>
@@ -120,6 +122,12 @@ function Header() {
           )}
         </Navbar.Collapse>
       </Navbar>
+      {openInformation && (
+        <Information
+          show={openInformation}
+          handleClose={() => setOpenInformation(false)}
+        />
+      )}
     </>
   );
 }

@@ -89,7 +89,7 @@ const ModalUpdateQuiz = ({ show, handleClose, quizSelected, fetchAllQuiz }) => {
       <Modal.Body>
         <Form noValidate>
           <Row className="mb-3">
-            <Form.Group as={Col} md="6" controlId="validationCustom01">
+            <Form.Group as={Col} md="6" controlId="">
               <Form.Label>Quiz's name</Form.Label>
               <Form.Control
                 type="text"
@@ -98,7 +98,7 @@ const ModalUpdateQuiz = ({ show, handleClose, quizSelected, fetchAllQuiz }) => {
                 onChange={(e) => setQuizName(e.target.value)}
               />
             </Form.Group>
-            <Form.Group as={Col} md="6" controlId="validationCustom02">
+            <Form.Group as={Col} md="6" controlId="">
               <Form.Label>Description</Form.Label>
               <Form.Control
                 type="text"

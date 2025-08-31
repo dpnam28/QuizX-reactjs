@@ -4,7 +4,24 @@
     "sign-up": "Đăng ký",
     "setting": "Cài đặt",
     "log-out": "Đăng xuất",
-    "information": "Thông tin"
+    "information": "Thông tin",
+    "info": {
+      "profile": "Hồ sơ",
+      "password": "Mật khẩu",
+      "history": "Lịch sử",
+      "email": "Email",
+      "username": "Tên người dùng",
+      "change": "Thay đổi",
+      "update": "Cập nhật",
+      "choose-image": "Chọn ảnh",
+      "current-password": "Mật khẩu hiện tại",
+      "new-password": "Mật khẩu mới",
+      "user": "Người dùng",
+      "admin": "Admin",
+      "quiz-name": "Tên quiz",
+      "total-question": "Tổng câu hỏi",
+      "total-correct": "Tổng câu đúng"
+    }
   },
   "homepage": {
     "title1": "Bản ghi, khảo sát, và các câu hỏi",
@@ -98,6 +115,24 @@
       "no-file-uploaded": "Chưa có file nào được tải lên",
       "actions": "Hành động",
       "difficulty": "Độ khó"
+    },
+    "create-questions": {
+      "title": "Tạo câu hỏi cho quiz",
+      "select-quiz": "Chọn quiz",
+      "add-question": "Thêm câu hỏi",
+      "no-file-uploaded": "Chưa có file nào được tải lên",
+      "question": "Câu hỏi",
+      "answer": "Câu trả lời",
+      "save": "Lưu"
     }
+  },
+  "user": {
+    "title": "Quiz của người dùng",
+    "start": "Bắt đầu",
+    "prev": "Trước",
+    "next": "Tiếp",
+    "finish": "Hoàn thành",
+    "back": "Về trang chủ",
+    "question": "Câu hỏi"
   }
 }

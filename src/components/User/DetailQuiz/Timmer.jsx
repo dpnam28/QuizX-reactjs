@@ -1,18 +1,23 @@
 import _ from "lodash";
 import { useEffect, useState } from "react";
 
-const Timmer = ({ listQuestions, finishQuiz, setIndexQuestion }) => {
-  const [time, setTime] = useState(10);
-  // useEffect(() => {
-  //   if (time === 0) {
-  //     finishQuiz();
-  //     return;
-  //   }
-  //   let timeInterval = setInterval(() => {
-  //     setTime(time - 1);
-  //   }, 1000);
-  //   return () => clearInterval(timeInterval);
-  // }, [time]);
+const Timmer = ({
+  listQuestions,
+  finishQuiz,
+  setIndexQuestion,
+  time,
+  setTime,
+}) => {
+  useEffect(() => {
+    if (time === 0) {
+      finishQuiz();
+      return;
+    }
+    let timeInterval = setInterval(() => {
+      setTime(time - 1);
+    }, 1000);
+    return () => clearInterval(timeInterval);
+  }, [time]);
 
   Number.prototype.toHHMMSS = function () {
     var sec_num = parseInt(this, 10); // don't forget the second param

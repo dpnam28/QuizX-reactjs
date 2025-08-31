@@ -3,7 +3,7 @@ import Card from "react-bootstrap/Card";
 import { getQuizByUser } from "../../services/apiServices";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { useTranslation } from "react-i18next";
 const ListQuiz = () => {
   const [listQuiz, setListQuiz] = useState([]);
   const navigate = useNavigate();
@@ -11,7 +11,7 @@ const ListQuiz = () => {
   useEffect(() => {
     getQuiz();
   }, []);
-
+  const { t } = useTranslation();
   const getQuiz = async () => {
     let res = await getQuizByUser();
     if (res?.EC === 0) {
@@ -39,7 +39,7 @@ const ListQuiz = () => {
                   navigate(`/quiz/${quiz.id}`);
                 }}
               >
-                Start
+                {t("user.start")}
               </Button>
             </Card.Body>
           </Card>

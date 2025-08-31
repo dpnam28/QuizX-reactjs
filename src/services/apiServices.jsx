@@ -121,7 +121,21 @@ export const postUpsertQuestionAnswer = (data) => {
 export const postLogOut = (email, refresh_token) => {
   return axios.post("api/v1/logout", { email, refresh_token });
 };
-
 export const getDashboardOverview = () => {
   return axios.get("api/v1/overview");
+};
+export const postUpdateProfile = (username, userImage) => {
+  let data = new FormData();
+  data.append("username", username);
+  data.append("userImage", userImage);
+  return axios.post("api/v1/profile", data);
+};
+export const postChangePassword = (current_password, new_password) => {
+  return axios.post("api/v1/change-password", {
+    current_password,
+    new_password,
+  });
+};
+export const getHistory = () => {
+  return axios.get("api/v1/history");
 };

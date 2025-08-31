@@ -101,7 +101,7 @@ function ModalCreate(props) {
         <Modal.Body>
           <Form noValidate>
             <Row className="mb-3">
-              <Form.Group as={Col} md="6" controlId="validationCustom01">
+              <Form.Group as={Col} md="6" controlId="">
                 <Form.Label> {t("admin.user-management.email")}</Form.Label>
                 <Form.Control
                   required
@@ -111,7 +111,7 @@ function ModalCreate(props) {
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </Form.Group>
-              <Form.Group as={Col} md="6" controlId="validationCustom02">
+              <Form.Group as={Col} md="6" controlId="">
                 <Form.Label> {t("admin.user-management.password")}</Form.Label>
                 <Form.Control
                   required
@@ -123,7 +123,7 @@ function ModalCreate(props) {
               </Form.Group>
             </Row>
             <Row className="mb-3">
-              <Form.Group as={Col} md="6" controlId="validationCustom03">
+              <Form.Group as={Col} md="6" controlId="">
                 <Form.Label>{t("admin.user-management.username")}</Form.Label>
                 <Form.Control
                   type="text"

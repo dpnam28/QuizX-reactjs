@@ -35,9 +35,6 @@ function ModalResult({ show, setShow, dataResult }) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Show answer
-          </Button>
         </Modal.Footer>
       </Modal>
     </>

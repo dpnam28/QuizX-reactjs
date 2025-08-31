@@ -4,7 +4,24 @@
     "sign-up": "Sign up",
     "setting": "Setting",
     "log-out": "Log out",
-    "information": "Information"
+    "information": "Information",
+    "info": {
+      "profile": "Profile",
+      "password": "Password",
+      "history": "History",
+      "email": "Email",
+      "username": "Username",
+      "change": "Change",
+      "update": "Update",
+      "choose-image": "Choose image",
+      "current-password": "Current password",
+      "new-password": "New password",
+      "user": "User",
+      "admin": "Admin",
+      "quiz-name": "Quiz's name",
+      "total-question": "Total question",
+      "total-correct": "Total correct"
+    }
   },
   "homepage": {
     "title1": "Forms, surveys, and quizzes",
@@ -98,6 +115,24 @@
       "actions": "Actions",
       "no-file-uploaded": "No file is uploaded",
       "difficulty": "Difficulty"
+    },
+    "create-questions": {
+      "title": "Create questions for quiz",
+      "select-quiz": "Select quiz",
+      "add-question": "Add question",
+      "no-file-uploaded": "No file is uploaded",
+      "question": "Question",
+      "answer": "Answer",
+      "save": "Save"
     }
+  },
+  "user": {
+    "title": "User's quiz",
+    "start": "Start",
+    "prev": "Prev",
+    "next": "Next",
+    "finish": "Finish",
+    "back": "Back to homepage",
+    "question": "Question"
   }
 }

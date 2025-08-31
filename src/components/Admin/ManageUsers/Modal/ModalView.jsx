@@ -43,7 +43,7 @@ function ModalView(props) {
         <Modal.Body>
           <Form noValidate>
             <Row className="mb-3">
-              <Form.Group as={Col} md="12" controlId="validationCustom01">
+              <Form.Group as={Col} md="12" controlId="">
                 <Form.Label>Email</Form.Label>
                 <Form.Control
                   required
@@ -55,7 +55,7 @@ function ModalView(props) {
               </Form.Group>
             </Row>
             <Row className="mb-3">
-              <Form.Group as={Col} md="12" controlId="validationCustom03">
+              <Form.Group as={Col} md="12" controlId="">
                 <Form.Label>Username</Form.Label>
                 <Form.Control
                   type="text"
