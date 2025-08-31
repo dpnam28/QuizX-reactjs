@@ -3,3 +3,7 @@
 .active {
   color: var(--color-blue-400) !important;
 }
+
+@theme {
+  --dashboard-gap: calc(50% - 10px);
+}
